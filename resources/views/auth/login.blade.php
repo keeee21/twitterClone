@@ -23,7 +23,7 @@
             </div>
 
             <!-- Password -->
-            <div class="mt-4">
+            <div class="mt-6">
                 <x-label for="password" :value="__('パスワード')" />
 
                 <x-input id="password" class="block mt-1 w-full"
@@ -32,15 +32,13 @@
                                 required autocomplete="current-password" />
             </div>
 
-            <!-- Remember Me -->
-
             <div class="flex items-center justify-end mt-4">
 
-                <x-button class="mx-5">
+                <x-button class="mr-3">
                     {{ __('ログイン') }}
                 </x-button>
 
-                <x-button-type class="mx-5">
+                <x-button-type class="ml-3">
                     {{ __('新規会員登録') }}
                 </x-button-type>
             </div>
