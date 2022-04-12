@@ -9,6 +9,16 @@ class Tweet extends Model
 {
     use HasFactory;
 
+    protected $table = 'tweets';
+
+    //可変項目
+    protected $fillable = [
+        'name',
+        'user_id',
+        'content',
+        'image',
+    ];
+
     public function User()
     {
         return $this->belongsTo(User::class);
@@ -16,6 +26,11 @@ class Tweet extends Model
 
     public function reaction()
     {
-        return $this->belongsTo(Reaction::class);
+        return $this->hasMany(Reaction::class);
+    }
+
+    public function favorite()
+    {
+        return $this->hasMany(Favorite::class);
     }
 }

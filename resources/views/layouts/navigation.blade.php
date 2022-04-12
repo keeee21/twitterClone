@@ -15,6 +15,7 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('TwitterClone') }}
                     </x-nav-link>
+                    
                 </div>
             </div>
 

@@ -22,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'email_verified_at',
+        'remember_token',
     ];
 
     /**
@@ -55,6 +57,11 @@ class User extends Authenticatable
 
     public function reaction()
     {
-        return $this->belongsTo(Reaction::class);
+        return $this->hasMany(Reaction::class);
+    }
+
+    public function favorite()
+    {
+        return $this->hasMany(Favorite::class);
     }
 }

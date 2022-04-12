@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             // $table->integer('tweet_id')->unsigned();
             $table->string('content');
-            $table->string('image')->nullable();
+            $table->string('image',140)->nullable();
             $table->timestamps();
         });
     }
