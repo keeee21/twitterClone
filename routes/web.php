@@ -3,6 +3,7 @@
 use App\Http\Controllers\TweetController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,11 @@ require __DIR__.'/auth.php';
 
 Route::get('tweet.create',[TweetController::class,'create'])->name('tweet.create');
 Route::post('tweet.store',[TweetController::class,'store'])->name('tweet.store');
+// Route::get('tweet.show/{id}',[TweetController::class,'show'])->name('tweet.show');
+
+
+Route::get('profile.create',[ProfileController::class,'create'])->name('profile.create');
+Route::get('profile.store',[ProfileController::class,'store'])->name('profile.store');
 
 
 
