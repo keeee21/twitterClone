@@ -28,22 +28,20 @@ class TweetController extends Controller
     {
         return view('tweets.create');
     }
+
+
     public function store(Request $request)
     {
-        
+        // $request->validate([
+        //     'content' => 'required|string|min:1|max:140'
+        // ]);
+        $id = Auth::id();
 
-
-
-
-
-        // dd($request);
         $tweet = new Tweet;
-
         $tweet->fill( [
             'user_id' => Auth::id(),
             'content' => $request->input('content'),
         ]);
-
         $tweet->save();
 
         // $tweets = Tweet::where('user_id', Auth::id())->get();
@@ -52,14 +50,20 @@ class TweetController extends Controller
 
         // dd($tweets);
 
-        return view('dashboard',compact('tweets'));
+        // return view('dashboard',compact('tweets'));
+        return redirect()->route('dashboard');
+
 
     }
 
     public function show($id)
     {   
-        // $tweet = Tweet::find($id);
-        // return view('tweet.show',compact('tweet'));
+        $tweet = Tweet::find($id);
+
+        return view('tweets.show',compact('tweet'));
+
+
+
         
     }
 
@@ -76,6 +80,14 @@ class TweetController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getDashboard(){
+
+        // dd(User::all());
+        $tweets = Tweet::all();
+        // dd($users);
+        return view('dashboard',compact('tweets'));
     }
 
 }

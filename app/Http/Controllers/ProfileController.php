@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Tweet;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
+
 
 class ProfileController extends Controller
 {
@@ -22,30 +28,58 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('profiles.create');
+    {   
+        $id = Auth::id();
+
+        $user = User::find($id) ?? new User();
+
+        if (is_null(($user->userProfile))) {
+            $registered = new UserProfile();
+        } else {
+            $registered = $user->userProfile;
+        };
+
+        return view('profiles/create',compact('registered'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
+
     public function store(Request $request)
     {
-        return redirect('dashboard');
+        $id = Auth::id();
+
+        $user = User::find($id) ?? new User();
+
+        if (is_null(($user->userProfile))) {
+            //新規の処理
+            $data = new UserProfile();
+        } else {
+            //既存データの処理
+            $data = UserProfile::where('user_id', $id)->first();
+        };
+
+        $data->user_id = Auth::id();
+        $data->screen_name = $request->input('screen_name');
+        $data->description = $request->input('description');
+        $data->location = $request->input('location');
+        $data->url = $request->input('url');
+        $data->icon_image = $request->input('icon_image');
+        $data->header_image = $request->input('header_image');
+
+        $data->save();
+
+
+        return redirect()->route('dashboard');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        //
+        // dd($id);
+        $profile = UserProfile::where('user_id', $id)->first();
+        // dd($profile);
+        return view('profiles/show',compact('profile'));
+
     }
 
     /**
@@ -81,4 +115,15 @@ class ProfileController extends Controller
     {
         //
     }
+
+    public function goDashboard()
+    {
+        $tweets = Tweet::all();
+
+        return view('dashboard',compact('tweets'));
+    }
+
+    
 }
+
+

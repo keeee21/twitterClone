@@ -19,6 +19,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
+
     protected $fillable = [
         'name',
         'email',
@@ -51,7 +53,7 @@ class User extends Authenticatable
         return $this->hasMany(Tweet::class);
     }
 
-    public function user_profile()
+    public function userProfile()
     {
             return $this->hasOne(UserProfile::class);
     }

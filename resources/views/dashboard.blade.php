@@ -21,27 +21,24 @@
             <div>
             </div>
 
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">名前</th>
-                            <th scope="col">ツイート内容</th>
-                            <th scope="col">作成日</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div class="">
+                    <div class="m-auto flex justify-around">
+                        <div scope="col">名前</div>
+                        <div scope="col">ツイート内容</div>
+                        <div scope="col">作成日</div>
+                        <div scope="col">ツイートの詳細</div>
 
-                    </tbody>
-
+                    </div>
                     @foreach($tweets as $tweet)
-                        <tr>
-                        <th>{{ $tweet->User->name}}</th>
-                        <th>{{ $tweet->content}}</th>
-                        <th>{{ $tweet->created_at}}</th>
-                        @endforeach
-                        </tr>
-                    </tbody>
-                </table>
+                    <div class="m-auto flex justify-around">
+                        <div><a href="{{ route('profile.show',['id' => $tweet->user_id]) }}">{{ $tweet->User->name}}</a></div>
+                        <div>{{ $tweet->content }}</div>
+                        <div>{{ $tweet->created_at }}</div>
+                        <div><a href="{{route('tweet.show',['id' => $tweet->id])}}">詳細を見る</a>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
         </div>
     </div>
 </x-app-layout>
