@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">今なにしてる？</h2>
+        <a href="{{route('dashboard')}}"><h2 class="font-semibold text-xl text-gray-800 leading-tight">今なにしてる？</h2></a>
     </x-slot>
     
     <div flex justify-around items-center>
