@@ -16,14 +16,6 @@ use Illuminate\Support\Facades\DB;
 
 class TweetController extends Controller
 {
-
-    
-    public function index()
-    {
-
-    }
-
-
     public function create()
     {
         return view('tweets.create');
@@ -35,7 +27,7 @@ class TweetController extends Controller
         // $request->validate([
         //     'content' => 'required|string|min:1|max:140'
         // ]);
-        $id = Auth::id();
+        $userId = Auth::id();
 
         $tweet = new Tweet;
         $tweet->fill( [
@@ -44,16 +36,7 @@ class TweetController extends Controller
         ]);
         $tweet->save();
 
-        // $tweets = Tweet::where('user_id', Auth::id())->get();
-
-        $tweets = Tweet::all();
-
-        // dd($tweets);
-
-        // return view('dashboard',compact('tweets'));
         return redirect()->route('dashboard');
-
-
     }
 
     public function show($id)
@@ -61,10 +44,6 @@ class TweetController extends Controller
         $tweet = Tweet::find($id);
 
         return view('tweets.show',compact('tweet'));
-
-
-
-        
     }
 
     public function edit($id)
@@ -84,9 +63,8 @@ class TweetController extends Controller
 
     public function getDashboard(){
 
-        // dd(User::all());
         $tweets = Tweet::all();
-        // dd($users);
+
         return view('dashboard',compact('tweets'));
     }
 

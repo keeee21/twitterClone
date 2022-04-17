@@ -25,8 +25,8 @@ class UserProfile extends Model
     ];
 
 
-    public function User()
+    public function user()
     {
-        return $this->belongsTo(User::class); //hasOne同士じゃね
+        return $this->belongsTo(User::class); 
     }
 }

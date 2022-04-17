@@ -20,7 +20,7 @@ class Tweet extends Model
         'image',
     ];
 
-    public function User()
+    public function user()
     {
         return $this->belongsTo(User::class,'user_id');
     }

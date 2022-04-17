@@ -26,12 +26,7 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-//ツイートの登録
-// Route::post('dashboard',[TweetController::class,'store'])->name('store');
-
 Route::get('/dashboard',[TweetController::class,'getDashboard'])->name('dashboard');
-
-Route::get('back',[ProfileController::class, 'goDashboard'])->name('back');
 
 Route::get('tweet/create',[TweetController::class,'create'])->name('tweet.create');
 Route::post('tweet/store',[TweetController::class,'store'])->name('tweet.store');
@@ -39,8 +34,6 @@ Route::get('tweet/show/{id}',[TweetController::class,'show'])->name('tweet.show'
 
 
 Route::get('profile/create',[ProfileController::class,'create'])->name('profile.create');
-Route::get('profile/store',[ProfileController::class,'store'])->name('profile.store');
+Route::get('profile/store',[ProfileController::class,'storeOrUpdate'])->name('profile.store');
 Route::get('profile/show/{id}',[ProfileController::class,'show'])->name('profile.show');
 Route::post('profile/store',[ProfileController::class,'store'])->name('profile.store');
-
-
