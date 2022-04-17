@@ -12,21 +12,13 @@ class ProfileController extends Controller
 {
     public function create()
     {   
-        $userId = Auth::id();
-
-        $user = User::find($userId) ?? new User();
-
-        $userProfile = $user->userProfile ?? new UserProfile();
-
-        return view('profiles/create',compact('userProfile'));
+        return view('profiles/create');
     }
 
-    public function storeOrUpdate(Request $request)
+    public function store(Request $request)
     {
         $userId = Auth::id();
-        $user = User::find($userId) ?? new User();
-        $userProfile = $user->userProfile ?? new UserProfile();
-
+        $userProfile = new UserProfile();
         $params = $request->all();
         $params = array_merge($params,['user_id' => $userId]);
         $userProfile->fill($params);
@@ -37,22 +29,31 @@ class ProfileController extends Controller
 
     public function show($id)
     {
-        $profile = UserProfile::where('user_id', $id)->first();
+        // $profile = UserProfile::where('user_id', $id)->first();
+        $profile = UserProfile::orderBy('created_at','desc')->where('user_id',$id)->first();
 
         return view('profiles/show',compact('profile'));
     }
 
-    public function update(Request $request, $id)
+    public function edit($id)
     {
-        //
+        $userProfile = UserProfile::orderBy('created_at','desc')->where('user_id',$id)->first();
+        return view('profiles.edit',compact('userProfile'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function update(Request $request)
+    {
+        $userId = Auth::id();
+        $userProfile = UserProfile::where('user_id',$userId)->first();
+        $params = $request->all();
+        $params = array_merge($params,['user_id' => $userId]);
+        $userProfile->fill($params);
+        $userProfile->save();
+
+        return redirect('dashboard');
+    }
+
+
     public function destroy($id)
     {
         //

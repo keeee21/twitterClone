@@ -9,6 +9,12 @@
             <div class="bg-pink-300">
                 <div class="flex">
                     <h1>プロフィール</h1>
+                    <form method="GET" action="" class="w-10/12 mx-auto md:max-w-md">
+                    @csrf
+                        <div class="mb-8">
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">フォロー</button>
+                        </div>
+                    </form>
                 </div> 
             </div>
             <div>
@@ -26,14 +32,17 @@
                     {{$profile->created_at}}
                     {{$profile->updated_at}}
 
+                    @if (Auth::id() === $profile->user_id)
+                        <a href="{{route('profile.edit',['id' => $profile->user_id])}}" class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">変更する</a>
 
 
-                    <form method="GET" action="" class="w-10/12 mx-auto md:max-w-md">
-                    @csrf
-                        <div class="mb-8">
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">フォロー</button>
-                        </div>
-                        
+                        <form method="POST" action="{{route('profile.destroy',['id' => $profile->user_id])}}" class="w-10/12 mx-auto md:max-w-md">
+                        @csrf
+                            <div class="mb-8">
+                                <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">削除する</button>
+                            </div>
+                        </form>
+                    @endif
                 </div>
             </div>
 

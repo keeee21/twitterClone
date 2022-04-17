@@ -37,3 +37,6 @@ Route::get('profile/create',[ProfileController::class,'create'])->name('profile.
 Route::get('profile/store',[ProfileController::class,'storeOrUpdate'])->name('profile.store');
 Route::get('profile/show/{id}',[ProfileController::class,'show'])->name('profile.show');
 Route::post('profile/store',[ProfileController::class,'store'])->name('profile.store');
+Route::get('profile/edit/{id}',[ProfileController::class,'edit'])->name('profile.edit');
+Route::post('profile/update',[ProfileController::class,'update'])->name('profile.update');
+Route::post('profile/destroy',[ProfileController::class,'destroy'])->name('profile.destroy');

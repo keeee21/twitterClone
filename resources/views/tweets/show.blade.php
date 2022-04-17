@@ -15,11 +15,12 @@
                 {{$tweet->image}}
                 {{$tweet->created_at}}
 
-                <form method="get" action="get">
-                    @csrf
-                    <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150" type="submit" >削除する</button>
-                </form>
-
+                @if (Auth::id() === $tweet->user_id)
+                    <form method="get" action="get">
+                        @csrf
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150" type="submit" >削除する</button>
+                    </form>
+                @endif
 
             </div>
 

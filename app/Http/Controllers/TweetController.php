@@ -9,6 +9,7 @@ use App\Models\Tweet;
 use App\Models\User;
 use App\Models\Reaction;
 use App\Models\Follower;
+use App\Models\UserProfile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
@@ -64,8 +65,9 @@ class TweetController extends Controller
     public function getDashboard(){
 
         $tweets = Tweet::all();
+        $profile = UserProfile::all();
 
-        return view('dashboard',compact('tweets'));
+        return view('dashboard',compact('tweets','profile'));
     }
 
 }
