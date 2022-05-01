@@ -3,62 +3,71 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserProfile;
+use App\Models\Tweet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
+use Illuminate\Http\UploadedFile;
+use Intervention\Image\Facades\Image;
+use App\Traits\saveImage;
+use App\Models\Follower;
+
+
 
 
 class ProfileController extends Controller
 {
-    public function create()
-    {   
-        return view('profiles/create');
-    }
+    use saveImage;
 
-    public function store(Request $request)
+    const RULES = [
+        'screen_name' => 'required|string|max:30',
+        'url' => 'nullable|url',
+        'icon_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        'header_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+    ];
+
+    public function index()
     {
         $userId = Auth::id();
-        $userProfile = new UserProfile();
-        $params = $request->all();
-        $params = array_merge($params,['user_id' => $userId]);
-        $userProfile->fill($params);
-        $userProfile->save();
+        $user = User::find($userId);
 
-        return redirect()->route('dashboard');
+        return view('profiles.index',compact('user'));
     }
 
     public function show($id)
     {
-        // $profile = UserProfile::where('user_id', $id)->first();
-        $profile = UserProfile::orderBy('created_at','desc')->where('user_id',$id)->first();
-
-        return view('profiles/show',compact('profile'));
+        $user = User::find($id);
+        if(is_null($user)){
+            abort(404);
+        }
+        return view('profiles.show',compact('user'));
     }
 
-    public function edit($id)
+    public function edit()
     {
-        $userProfile = UserProfile::orderBy('created_at','desc')->where('user_id',$id)->first();
-        return view('profiles.edit',compact('userProfile'));
+        $user = User::find(Auth::id());
+        return view('profiles.edit',compact('user'));
     }
 
     public function update(Request $request)
     {
-        $userId = Auth::id();
-        $userProfile = UserProfile::where('user_id',$userId)->first();
-        $params = $request->all();
-        $params = array_merge($params,['user_id' => $userId]);
-        $userProfile->fill($params);
+
+        $request->validate(self::RULES);
+
+        $userProfile = Auth::user()->UserProfile::where('user_id',Auth::id())->first();
+        $userProfile->user_id = Auth::id();
+        $userProfile->screen_name = $request->screen_name;
+        $userProfile->description = $request->description;
+        $userProfile->location = $request->location;
+        $userProfile->url = $request->url;
+        $userProfile->icon_image = $this->saveImage($request->icon_image);
+        $userProfile->header_image = $this->saveImage($request->header_image);
         $userProfile->save();
 
-        return redirect('dashboard');
+        return redirect()->route('profile.index');
     }
-
-
-    public function destroy($id)
-    {
-        //
-    }
-    
 }
 
 

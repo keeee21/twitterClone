@@ -153,6 +153,14 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'screen_name' => 'アカウント名',
+        'content' => 'ツイート本文',
+        'name' => '氏名',
+        'email' => 'メールアドレス',
+        'password' => 'パスワード',
+        'icon_image' => 'アイコン',
+        'header_image' => 'ヘッダー',
+    ],
 
 ];

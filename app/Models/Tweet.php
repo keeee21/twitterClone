@@ -25,13 +25,15 @@ class Tweet extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
-    public function reaction()
-    {
-        return $this->hasMany(Reaction::class);
-    }
-
-    public function favorite()
+    public function favorites()
     {
         return $this->hasMany(Favorite::class);
+    }
+
+    //「ツイートが」押されたいいね数
+    public function pushedFavoriteBtnCount($tweetId)
+    {
+        $pushedFavoriteBtnCount = count(Favorite::where('tweet_id',$tweetId)->get());
+        return $pushedFavoriteBtnCount;
     }
 }

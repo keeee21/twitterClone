@@ -11,6 +11,8 @@
     <div flex justify-around items-center>
         <div class="w-11/12 max-w-screen-md m-auto">
             <div>
+                <h1 class="text-xl font-bold mt-5">{{$tweet->User->UserProfile->screen_name}}</h1>
+
                 <div class="my-5 py-5 flex justify-around border focus:outline-none focus:border-b-2 focus:border-indigo-500">
                     <div class="my-2">
                         @if(is_null($tweet->User->UserProfile->icon_image))
@@ -30,12 +32,22 @@
                     @if (Auth::id() === $tweet->user_id)
                     <form method="post" action="{{route('tweet.destroy',$tweet->id)}}" class="mt-5">
                         @csrf
-                        <button value="削除" data-id="{{$tweet->id}}" onclick="deletePost();" class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150" type="submit" >削除する</button>
+                        <button value="削除" data-id="{{$tweet->id}}" onclick="deletePost(this);" class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150" type="submit" >削除する</button>
                     </form>
                     @endif
                 </div>
                 <div>
-                    <a href="{{route('favorite.users',['id'=>$tweet->id])}}">{{$pushedFavoriteBtnCount}}件のいいね</a>
+                    @if(!$tweet->user->canFavorite($tweet->id))
+                        <form method="POST" action="{{route('favorite',$tweet)}}">
+                        @csrf
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">いいね</button>
+                        </form>
+                        @else
+                        <form method="POST" action="{{route('unfavorite',$tweet)}}">
+                        @csrf
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">いいねした</button>
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>
