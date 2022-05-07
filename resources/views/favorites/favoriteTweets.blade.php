@@ -23,7 +23,7 @@
                                 @endif
                             </div>
                             <div class="my-5 font-semibold">{{ $favoriteTweet->tweet->user->userProfile->screen_name }}</div>
-                            <div class="m-5 text-s">{{ $favoriteTweet->tweet->created_at }}</div>
+                            <div class="m-5 text-s">{{ $favoriteTweet->tweet->updated_at }}</div>
                         </div>
                         <div class="my-5 ml-5">{{ $favoriteTweet->tweet->content }}</div>
                         <div class="flex justify-around">

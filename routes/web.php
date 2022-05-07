@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\TweetController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use App\Models\Follower;
 
@@ -28,10 +30,12 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function(){
     // Route::get('/dashboard',[TweetController::class,'getDashboard'])->name('dashboard');
     Route::get('tweet/create',[TweetController::class,'create'])->name('tweet.create');
+    Route::get('tweet/edit/{id}',[TweetController::class,'edit'])->name('tweet.edit');
+    Route::post('tweet/update/{id}',[TweetController::class,'update'])->name('tweet.update');
     Route::post('tweet/store',[TweetController::class,'store'])->name('tweet.store');
     Route::post('tweet/destroy/{id}',[TweetController::class,'destroy'])->name('tweet.destroy');
     Route::get('profile/index',[ProfileController::class,'index'])->name('profile.index');
-    Route::get('profile/store',[ProfileController::class,'storeOrUpdate'])->name('profile.store');
+    // Route::get('profile/store',[ProfileController::class,'storeOrUpdate'])->name('profile.store');
     Route::post('profile/store',[ProfileController::class,'store'])->name('profile.store');
     Route::get('profile/edit',[ProfileController::class,'edit'])->name('profile.edit');
     Route::post('profile/update',[ProfileController::class,'update'])->name('profile.update');
@@ -39,7 +43,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('users/follow/{user}',[FollowerController::class,'follow'])->name('follow');
     Route::post('users/unfollow/{user}',[FollowerController::class,'unfollow'])->name('unfollow');
     Route::post('users/favorite/{tweet}',[FavoriteController::class,'favorite'])->name('favorite');
-    Route::post('users/unfavorite/{tweet}',[FavoriteController::class,'unFavorite'])->name('unfavorite');
+    // Route::post('users/unfavorite/{tweet}',[FavoriteController::class,'unFavorite'])->name('unfavorite');
+    Route::post('tweet/reply/{tweet}',[CommentController::class,'store'])->name('reply');
+    Route::post('tweet/reply/destroy/{id}',[CommentController::class,'destroy'])->name('reply.destroy');
 });
 
 //ログインしなくても使えるものを外に出す
@@ -51,5 +57,7 @@ Route::get('favorite.tweets',[FavoriteController::class,'favoriteTweets'])->name
 Route::get('favorite/users/{id}',[FavoriteController::class,'favoriteUsers'])->name('favorite.users');
 Route::get('profile/show/{id}',[ProfileController::class,'show'])->name('profile.show');
 Route::get('tweet/{id}',[TweetController::class,'show'])->name('tweet.show');
+Route::get('search/show',[SearchController::class,'show'])->name('search.show');
+
 
 require __DIR__.'/auth.php';

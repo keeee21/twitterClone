@@ -84,11 +84,6 @@ class User extends Authenticatable
             return $this->hasOne(UserProfile::class);
     }
 
-    // public function reaction()
-    // {
-    //     return $this->hasMany(Reaction::class);
-    // }
-
     //いいね
     public function favorites()
     {
@@ -105,4 +100,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class,'followers','follower_id','following_id');
     }
+
+    // public function comments()
+    // {
+    //     return $this->hasMany(Comment::class,'user_id','id');
+    // }
 }

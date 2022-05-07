@@ -23,7 +23,7 @@
 
                 <div class="my-5 p-5 border bg-white">
                     <div class="flex justify-end">
-                        <a href="{{route('profile.edit')}}" class="inline-flex items-center px-4 py-2 bg-white-800 border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:text-white hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150" >プロフィールを編集する</a>
+                        <a href="{{route('profile.edit')}}" class="inline-flex items-center px-4 py-2 bg-white-800 border border-blue-700 border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:text-white hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150" >プロフィールを編集する</a>
                     </div>
                     <div class="mb-8 w-full">
                         @if(empty($user->UserProfile->header_image))
@@ -63,7 +63,7 @@
                         <a href="{{route('favorite.tweets')}}">いいねしたツイート:{{$user->favoriteCount()}}</a>
                     </div>
                 </div>
-                <div class="max-w-screen-md m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                <div class="max-w-screen-md m-auto my-5 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                     @foreach($user->tweets as $tweet)
                         <div class="border py-5">
                             <a href="{{route('tweet.show',['id' => $tweet->id])}}">
@@ -76,7 +76,6 @@
                                         @endif
                                     </div>
                                     <div class="my-5 font-semibold">{{ $tweet->User->UserProfile->screen_name }}</div>
-                                    <div class="m-5 text-s">{{ $tweet->created_at }}</div>
                                 </div>
                                 <div class="my-5 ml-5">{{ $tweet->content }}</div>
                                 <div class=" flex justify-around">
@@ -84,20 +83,18 @@
                                         <img class="w-full h-50 rounded" src="{{asset($tweet->image)}}" width="100" height="100">
                                     @endif
                                 </div>
-                                <div>
-                                    @if(!$user->canFavorite($tweet->id))
-                                        <form method="POST" class="ml-5" action="{{route('favorite',$tweet)}}">
-                                        @csrf
-                                            <button type="submit" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">いいね</button>
-                                        </form>
-                                        @else
-                                        <form method="POST" class="ml-5" action="{{route('unfavorite',$tweet)}}">
-                                        @csrf
-                                            <button type="submit" class="bg-red-700 text-white hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">いいね</button>
-                                        </form>
-                                    @endif
-                                </div>
                             </a>
+                                <div class="flex">
+                                    @if(!$user->canFavorite($tweet->id))
+                                        <button data-tweet-id="{{$tweet->id}}" id="{{$tweet->id}}" class="favorite btn">いいね</button>
+                                    @else
+                                        <button data-tweet-id="{{$tweet->id}}" id="{{$tweet->id}}" class="favorite pushedFavorite">いいね</button>
+                                    @endif
+                                    <div class="mt-2">
+                                        <a href="{{route('tweet.show',['id' => $tweet->id])}}" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900">リプする</a>
+                                    </div>
+                                </div>
+                            <div class="flex justify-end mx-5">{{ $tweet->updated_at }}</div>
                         </div>
                     @endforeach
                 </div>

@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -33,4 +34,6 @@
             </main>
         </div>
     </body>
+    <script src="{{mix('js/favorite.js')}}"></script>
+    <script src="{{mix('js/follow.js')}}"></script>
 </html>

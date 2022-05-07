@@ -2,17 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserProfile;
-use App\Models\Tweet;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\File;
-use Illuminate\Http\UploadedFile;
-use Intervention\Image\Facades\Image;
+
 use App\Traits\saveImage;
-use App\Models\Follower;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 
 
@@ -64,9 +58,16 @@ class ProfileController extends Controller
         $userProfile->url = $request->url;
         $userProfile->icon_image = $this->saveImage($request->icon_image);
         $userProfile->header_image = $this->saveImage($request->header_image);
-        $userProfile->save();
 
-        return redirect()->route('profile.index');
+        if(Auth::user()->checkAuthUserId($userProfile->user_id)){
+            $userProfile->save();
+            return redirect()->route('profile.index');
+        }
+        return redirect()->route('dashboard')->with('error','許可されていない操作です');
+
+        // $userProfile->save();
+
+        // return redirect()->route('profile.index');
     }
 }
 

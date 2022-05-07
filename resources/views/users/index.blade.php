@@ -21,20 +21,15 @@
                         @endif
                     </div>
                     <div class="my-5">{{$profile->screen_name}}</div>
+                    <div class="flex justify-around">{{$profile->description}}</div>
+                </a>
+                <div>
                     @if(!$profile->User->canFollow($profile->User->id))
-                        <form method="POST" action="{{route('follow',['user'=>$profile->User->id])}}">
-                        @csrf
-                            <button type="submit" class="inline-flex items-center px-4 py-2 my-5 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">フォロー</button>
-                        </form>
+                        <button data-user-id="{{$profile->User->id}}" id="{{$profile->User->id}}" class="follow pushedUnFollow inline-flex items-center px-4 py-2 my-5 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">フォロー</button>
                     @else
-                        <form method="POST" action="{{route('unfollow',['user'=>$profile->User->id])}}">
-                        @csrf
-                            <button type="submit" class="inline-flex items-center px-4 py-2 my-5 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">フォロー解除</button>
-                        </form>
+                        <button data-user-id="{{$profile->User->id}}" id="{{$profile->User->id}}" class="follow pushedFollow inline-flex items-center px-4 py-2 my-5 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">フォロー解除</button>
                     @endif
                 </div>
-                <div class="flex justify-around">{{$profile->description}}</div>
-                </a>
             </div>
             @endforeach
     </div>

@@ -2,30 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Follower;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class FollowerController extends Controller
 {
+    public function follow(Request $request)
+    {
+        $userId = Auth::id();
+        $followUserId = $request->user_id;
+        $isAlreadyFollow = Follower::where('following_id',$userId)->where('follower_id',$followUserId)->first();
 
-    //フォローする
-    public function follow(User $user) {
-        $follow = new Follower;
-        $follow->following_id = Auth::id();
-        $follow->follower_id = $user->id;
-        $follow->save();
 
-        return Redirect::back();
-    }
-    //フォロー解除する
-    public function unfollow(User $user){
-        $follow = Follower::where('following_id',Auth::id())->where('follower_id',$user->id)->first();
-        $follow->delete(); //物理削除
-
-        return Redirect::back();
+        if(!$isAlreadyFollow){ //既にフォローしたか
+            $follow = new Follower();
+            $follow->following_id = Auth::id();
+            $follow->follower_id = $followUserId;
+            $follow->save();
+        } else {
+            $follow = $isAlreadyFollow;
+            $follow->delete();
+        }
     }
 
     public function showFollowingUser()

@@ -37,7 +37,7 @@
                 </ul>
             </div>
         @endif
-
+        
         <div class="max-w-screen-md m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
             @foreach($tweets as $tweet)
                 @if($user->canFollow($tweet->user_id) || $tweet->user_id == Auth::id())
@@ -59,20 +59,26 @@
                                     <img class="w-50 h-50 rounded" src="{{asset($tweet->image)}}" width="100" height="100">
                                 @endif
                         </div>
+                        <div class="flex justify-content">
+                            <div>
+                                @if(!$user->canFavorite($tweet->id))
+                                    <form method="POST" class="ml-5" action="{{route('favorite',$tweet)}}">
+                                    @csrf
+                                        <button type="submit" class="favorite text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">いいね</button>
+                                    </form>
+                                    @else
+                                    <form method="POST" class="ml-5" action="{{route('unfavorite',$tweet)}}">
+                                    @csrf
+                                        <button type="submit" class="favorite bg-red-700 text-white hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">いいね</button>
+                                    </form>
+                                @endif
+                            </div>
+                            <div class="mt-2">
+                                <a href="{{route('tweet.show',['id' => $tweet->id])}}" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900">リプする</a>
+                            </div>
+                        </div>
+                        <div class="mt-5 mx-5 text-s flex justify-end">{{ $tweet->updated_at }}</div>
                     </a>
-                    <div class="flex justify-content">
-                        <div>
-                            @if(!$user->canFavorite($tweet->id))
-                                <button data-tweet-id="{{$tweet->id}}" class="favorite text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">いいね</button>
-                            @else
-                                <button data-tweet-id="{{$tweet->id}}" class="favorite pushedFavorite">いいね</button>
-                            @endif
-                        </div>
-                        <div class="mt-2">
-                            <a href="{{route('tweet.show',['id' => $tweet->id])}}" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900">リプする</a>
-                        </div>
-                    </div>
-                    <div class="mt-2 mx-5 text-s flex justify-end">{{ $tweet->updated_at }}</div>
                 </div>
                 @endif
             @endforeach
@@ -80,3 +86,4 @@
     </div>
 </x-app-layout>
 
+<script src="{{mix('js/favorite.js')}}"></script>

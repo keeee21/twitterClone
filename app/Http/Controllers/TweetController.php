@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Comment;
+use App\Traits\saveImage;
 use App\Models\Tweet;
 use App\Models\User;
-use App\Models\Reaction;
-use App\Models\Follower;
-use App\Models\UserProfile;
-use App\Traits\saveImage;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
 
 class TweetController extends Controller
 {
     use saveImage;
+
+    const RULES = [
+        'content' => 'required|string|max:140',
+        'tweetImage' =>'image|mimes:jpeg,png,jpg|max:2048',
+    ];
 
     public function create()
     {
@@ -27,10 +26,7 @@ class TweetController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'content' => 'required|string|max:140',
-            'tweetImage' =>'image|mimes:jpeg,png,jpg|max:2048',
-        ]);
+        $request->validate(self::RULES);
 
         $userId = Auth::id();
         $tweet = new Tweet;
@@ -47,14 +43,41 @@ class TweetController extends Controller
 
     public function show($id)
     {   
-
         $tweet = Tweet::find($id);
         if(is_null($tweet)){
             abort(404);
         }
 
+        $comments = Comment::where('tweet_id',$id)->get();
+
         $pushedFavoriteBtnCount = $tweet->pushedFavoriteBtnCount($id);
-        return view('tweets.show',compact('tweet','pushedFavoriteBtnCount'));
+        return view('tweets.show',compact('tweet','pushedFavoriteBtnCount','comments'));
+    }
+
+    public function edit($id)
+    {
+        $tweet = Tweet::find($id);
+        if(is_null($tweet)){
+            abort(404);
+        }
+        $user = User::find(Auth::id());
+        return view('tweets.edit',compact('user','tweet'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate(self::RULES);
+
+        $updateTweet = Tweet::find($id);
+
+        $updateTweet->content = $request->content;
+        $updateTweet->image = $this->saveImage($request->tweetImage);
+
+        if(Auth::user()->checkAuthUserId($updateTweet->user_id)){
+            $updateTweet->save();
+            return redirect()->route('tweet.show',['id' => $updateTweet->id]);
+        }
+        return redirect()->route('dashboard')->with('error','許可されていない操作です');
     }
 
     public function destroy($id)
@@ -68,10 +91,9 @@ class TweetController extends Controller
         return redirect()->route('dashboard')->with('error','許可されていない操作です');
     }
 
-    public function getDashboard(){
-
+    public function getDashboard()
+    {
         $tweets = Tweet::orderBy('created_at','desc')->get();
-        // $profiles = UserProfile::all();
         $user = new User;
         return view('dashboard',compact('tweets','user'));
     }

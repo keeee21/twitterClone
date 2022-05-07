@@ -161,6 +161,8 @@ return [
         'password' => 'パスワード',
         'icon_image' => 'アイコン',
         'header_image' => 'ヘッダー',
+        'keyword' => '検索するキーワード',
+        'reply' => 'リプ',
     ],
 
 ];

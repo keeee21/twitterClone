@@ -9,12 +9,14 @@
     </x-slot>
     
     {{-- フォローした人たち表示 --}}
-    <div flex justify-around items-center>
-        <div class="w-11/12 max-w-screen-md m-auto">
+    <div class="max-w-screen-md m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-11/12 max-w-screen-md m-auto my-5">
             @foreach($followers as $follower)
+            <div class="border">
                     <a href="{{route('profile.show',['id' => $follower->UserProfile->user_id])}}">
-                        <div class="my-5 py-5 flex justify-around border focus:outline-none focus:border-b-2 focus:border-indigo-500">
-                            <div class="my-2">
+                    <div class="flex">
+                        <div class="flex focus:outline-none">
+                            <div class="m-5">
                                 @if(is_null($follower->UserProfile->icon_image))
                                     <img class="w-20 h-20 rounded" src="{{asset('storage/images/no_image.png')}}" width="100" height="100">
                                 @else
@@ -23,8 +25,11 @@
                             </div>
                             <div class="my-5">{{ $follower->UserProfile->screen_name }}</div>
                         </div>
+                        <div class="mx-10">{{$follower->userProfile->description}}</div>
+                    </div>
                     </a>
             @endforeach
+            </div>
         </div>
     </div>
 </x-app-layout>
