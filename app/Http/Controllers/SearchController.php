@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchRequest;
 use App\Models\Tweet;
 use App\Models\UserProfile;
-use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    public function show(Request $request)
+    public function show(SearchRequest $request)
     {
-        //バリデーション
-        $request->validate([
-            'keyword' => 'required|string|max:10',
-        ]);
+
         $keyword = $request->keyword;
 
         //allだった場合

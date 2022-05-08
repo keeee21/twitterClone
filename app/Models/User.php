@@ -2,17 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Tweet;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Follower;
-
-
 
 class User extends Authenticatable
 {
@@ -100,9 +96,4 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class,'followers','follower_id','following_id');
     }
-
-    // public function comments()
-    // {
-    //     return $this->hasMany(Comment::class,'user_id','id');
-    // }
 }

@@ -50,8 +50,8 @@ class TweetController extends Controller
 
         $comments = Comment::where('tweet_id',$id)->get();
 
-        $pushedFavoriteBtnCount = $tweet->pushedFavoriteBtnCount($id);
-        return view('tweets.show',compact('tweet','pushedFavoriteBtnCount','comments'));
+        $numOfFavoriteBtn = $tweet->pushedFavoriteBtnCount($id);
+        return view('tweets.show',compact('tweet','numOfFavoriteBtn','comments'));
     }
 
     public function edit($id)

@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Traits\saveImage;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
-
-
 
 class ProfileController extends Controller
 {
@@ -47,7 +43,6 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-
         $request->validate(self::RULES);
 
         $userProfile = Auth::user()->UserProfile::where('user_id',Auth::id())->first();
@@ -64,10 +59,6 @@ class ProfileController extends Controller
             return redirect()->route('profile.index');
         }
         return redirect()->route('dashboard')->with('error','許可されていない操作です');
-
-        // $userProfile->save();
-
-        // return redirect()->route('profile.index');
     }
 }
 

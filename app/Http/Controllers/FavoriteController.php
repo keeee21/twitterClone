@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Favorite;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
@@ -14,14 +14,13 @@ class FavoriteController extends Controller
         $favoriteTweetId = $request->tweet_id;
         $isAlreadyFavorite = Favorite::where('user_id',$userId)->where('tweet_id',$favoriteTweetId)->first();
 
-        if(!$isAlreadyFavorite){ //既にいいねしたか
+        if(!$isAlreadyFavorite){ //いいねをしていない場合
             $favorite = new Favorite();
             $favorite->user_id = Auth::id();
             $favorite->tweet_id = $favoriteTweetId;
             $favorite->save();
         } else { //もし既にいいねしてたら
-            $favorite = $isAlreadyFavorite;
-            $favorite->delete();
+            $isAlreadyFavorite->delete();
         }
     }
 
@@ -35,7 +34,6 @@ class FavoriteController extends Controller
     {
         $tweetId = $id;
         $favoriteUsers = Favorite::where('tweet_id',$tweetId)->get();
-        // dd($favoriteUsers);
         return view('favorites.favoriteUsers',compact('favoriteUsers'));
     }
 }

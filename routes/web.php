@@ -5,11 +5,9 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\TweetController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
-use App\Models\Follower;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,15 +33,12 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('tweet/store',[TweetController::class,'store'])->name('tweet.store');
     Route::post('tweet/destroy/{id}',[TweetController::class,'destroy'])->name('tweet.destroy');
     Route::get('profile/index',[ProfileController::class,'index'])->name('profile.index');
-    // Route::get('profile/store',[ProfileController::class,'storeOrUpdate'])->name('profile.store');
     Route::post('profile/store',[ProfileController::class,'store'])->name('profile.store');
     Route::get('profile/edit',[ProfileController::class,'edit'])->name('profile.edit');
     Route::post('profile/update',[ProfileController::class,'update'])->name('profile.update');
     Route::post('profile/destroy',[ProfileController::class,'destroy'])->name('profile.destroy');
     Route::post('users/follow/{user}',[FollowerController::class,'follow'])->name('follow');
-    Route::post('users/unfollow/{user}',[FollowerController::class,'unfollow'])->name('unfollow');
     Route::post('users/favorite/{tweet}',[FavoriteController::class,'favorite'])->name('favorite');
-    // Route::post('users/unfavorite/{tweet}',[FavoriteController::class,'unFavorite'])->name('unfavorite');
     Route::post('tweet/reply/{tweet}',[CommentController::class,'store'])->name('reply');
     Route::post('tweet/reply/destroy/{id}',[CommentController::class,'destroy'])->name('reply.destroy');
 });

@@ -30,6 +30,7 @@
             </div>
             @endif
         </div>
+        
         <div class="w-11/12 max-w-screen-md m-auto my-5">
             <div class="max-w-screen-md m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <div>    
@@ -71,7 +72,7 @@
                 </div>    
             </div>
                 <div>
-                    <a href="{{route('favorite.users',['id'=>$tweet->id])}}">{{$pushedFavoriteBtnCount}}件のいいね</a>
+                    <a href="{{route('favorite.users',['id'=>$tweet->id])}}" class="hover:text-blue-700">{{$numOfFavoriteBtn}}件のいいね</a>
                 </div>
 
             {{-- リプのフォーム表示 --}}

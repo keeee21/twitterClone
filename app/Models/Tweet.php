@@ -33,7 +33,7 @@ class Tweet extends Model
     //「ツイートが」押されたいいね数
     public function pushedFavoriteBtnCount($tweetId)
     {
-        $pushedFavoriteBtnCount = count(Favorite::where('tweet_id',$tweetId)->get());
-        return $pushedFavoriteBtnCount;
+        $numOfFavoriteBtn = count(Favorite::where('tweet_id',$tweetId)->get());
+        return $numOfFavoriteBtn;
     }
 }

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Follower;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
 
 class FollowerController extends Controller
 {
@@ -16,8 +14,7 @@ class FollowerController extends Controller
         $followUserId = $request->user_id;
         $isAlreadyFollow = Follower::where('following_id',$userId)->where('follower_id',$followUserId)->first();
 
-
-        if(!$isAlreadyFollow){ //既にフォローしたか
+        if(!$isAlreadyFollow){ //フォローをしていない場合
             $follow = new Follower();
             $follow->following_id = Auth::id();
             $follow->follower_id = $followUserId;
