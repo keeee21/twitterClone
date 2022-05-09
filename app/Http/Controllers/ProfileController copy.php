@@ -36,23 +36,15 @@ class ProfileController extends Controller
         return view('profiles.show',compact('user'));
     }
 
-    public function edit($id)
+    public function edit()
     {
-        // $user = User::find(Auth::id());
-        // return view('profiles.edit',compact('user'));
-
-        $user = User::find($id);
-        if(is_null($user)){
-            abort(404);
-        }
+        $user = User::find(Auth::id());
         return view('profiles.edit',compact('user'));
     }
 
-    public function update(Request $request, UserProfile $savedUserProfile, $id)
+    public function update(Request $request, UserProfile $savedUserProfile)
     {
         $request->validate(self::RULES);
-
-        $savedUserProfile = UserProfile::find($id);
 
         $userProfile = Auth::user()->UserProfile::where('user_id',Auth::id())->first();
         $userProfile->user_id = Auth::id();
@@ -69,6 +61,13 @@ class ProfileController extends Controller
         } else {
             return redirect()->route('profile.index')->with('error','更新に失敗しました');
         }
+
+
+        // if(Auth::user()->checkAuthUserId($userProfile->user_id)){
+        //     $userProfile->save();
+        //     return redirect()->route('profile.index');
+        // }
+        // return redirect()->route('dashboard')->with('error','許可されていない操作です');
     }
 }
 

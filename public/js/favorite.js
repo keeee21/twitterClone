@@ -10953,6 +10953,8 @@ $(function () {
       }
     }) //通信成功した時の処理
     .done(function (data) {
+      var responseJSON = JSON.parse(data);
+      console.log(responseJSON.status);
       classFavorite.toggleClass("pushedFavorite");
       classFavorite.toggleClass("btn");
     }) //通信失敗した時の処理

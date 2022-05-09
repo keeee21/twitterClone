@@ -46,42 +46,36 @@
                 @endforeach
               @endif
             </div>
-              {{-- ツイート表示 --}}
+        {{-- ツイート表示 --}}
 
-              <div class="max-w-screen-md m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                @if(!is_null($searchedTweets))
-                  @foreach($searchedTweets as $searchedTweet)
-                    <div class="border py-5">
-                      <a href="{{route('tweet.show',['id' => $searchedTweet->id])}}">
-                        <div class="flex justify-around focus:outline-none">
-                          <div class="m-5">
-                            @if(is_null($searchedTweet->User->UserProfile->icon_image))
-                              <img class="w-20 h-20 rounded-full" src="{{asset('storage/images/no_image.png')}}" width="100" height="100">
-                            @else
-                              <img class="w-20 h-20 rounded-full" src="{{asset($searchedTweet->User->UserProfile->icon_image)}}" width="100" height="100">
-                            @endif
-                          </div>
-                          <div class="my-5">{{$searchedTweet->User->UserProfile->screen_name}}</div>
-                        </div>
-                        <div class="flex justify-around">{{$searchedTweet->content}}</div>
-                        <div>
-                          @if(!$searchedTweet->user->canFavorite($searchedTweet->id))
-                              <form method="POST" class="ml-5" action="{{route('favorite',$searchedTweet->id)}}">
-                                @csrf
-                                <button type="submit" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">いいね</button>
-                              </form>
+            <div class="max-w-screen-md m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+              @if(!is_null($searchedTweets))
+                @foreach($searchedTweets as $searchedTweet)
+                  <div class="border py-5">
+                    <a href="{{route('tweet.show',['id' => $searchedTweet->id])}}">
+                      <div class="flex justify-around focus:outline-none">
+                        <div class="m-5">
+                          @if(is_null($searchedTweet->User->UserProfile->icon_image))
+                            <img class="w-20 h-20 rounded-full" src="{{asset('storage/images/no_image.png')}}" width="100" height="100">
                           @else
-                              <form method="POST" class="ml-5" action="{{route('unfavorite',$searchedTweet->id)}}">
-                                @csrf
-                                <button type="submit" class="bg-red-700 text-white hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">いいね</button>
-                              </form>
+                            <img class="w-20 h-20 rounded-full" src="{{asset($searchedTweet->User->UserProfile->icon_image)}}" width="100" height="100">
                           @endif
                         </div>
-                      </a>
-                    </div>
-                  @endforeach
-                @endif
-              </div>
-        </div>
+                        <div class="my-5">{{$searchedTweet->User->UserProfile->screen_name}}</div>
+                      </div>
+                      <div class="flex justify-around">{{$searchedTweet->content}}</div>
+                      <div>
+                          @if(!$searchedTweet->user->canFavorite($searchedTweet->id))
+                              <button data-tweet-id="{{$searchedTweet->id}}" id="{{$searchedTweet->id}}" class="favorite btn">いいね</button>
+                          @else
+                              <button data-tweet-id="{{$searchedTweet->id}}" id="{{$searchedTweet->id}}" class="favorite pushedFavorite">いいね</button>
+                          @endif
+                      </div>
+                    </a>
+                  </div>
+                @endforeach
+              @endif
+            </div>
+      </div>
     </div>
 </x-app-layout>

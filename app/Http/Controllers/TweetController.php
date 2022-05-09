@@ -33,12 +33,9 @@ class TweetController extends Controller
         $tweet->user_id = $userId;
         $tweet->content = $request->content;
         $tweet->image = $this->saveImage($request->tweetImage);
-
-        if(Auth::user()->checkAuthUserId($tweet->user_id)){
-            $tweet->save();
-            return redirect()->route('dashboard');
-        }
-        return Redirect::back()->with('error','許可されていない操作です');
+        $tweet->save();
+            
+        return redirect()->route('dashboard');
     }
 
     public function show($id)
@@ -50,8 +47,8 @@ class TweetController extends Controller
 
         $comments = Comment::where('tweet_id',$id)->get();
 
-        $numOfFavoriteBtn = $tweet->pushedFavoriteBtnCount($id);
-        return view('tweets.show',compact('tweet','numOfFavoriteBtn','comments'));
+        $numOfPushedFavoriteBtn = $tweet->pushedFavoriteBtnCount($id);
+        return view('tweets.show',compact('tweet','numOfPushedFavoriteBtn','comments'));
     }
 
     public function edit($id)

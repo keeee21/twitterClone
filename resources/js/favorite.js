@@ -22,6 +22,8 @@ $(function (){
     })
     //通信成功した時の処理
     .done(function (data) {
+      const responseJSON = JSON.parse(data);
+      console.log(responseJSON.status);
       classFavorite.toggleClass("pushedFavorite");
       classFavorite.toggleClass("btn");
     })

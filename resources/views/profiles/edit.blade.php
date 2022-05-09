@@ -23,9 +23,8 @@
                 @endif
 
                 <div class="mt-8">
-
-                    <form method="POST" action="{{route('profile.update',['id' => $user->UserProfile->user_id])}}" enctype="multipart/form-data" class="w-10/12 mx-auto md:max-w-md">
-                    @csrf
+                    <form method="POST" action="{{route('profile.update',['id' => $user->id])}}" enctype="multipart/form-data" class="w-10/12 mx-auto md:max-w-md">
+                        @csrf
                         <div class="mb-8">
                             <label for="screen_name" class="text-sm block">アカウント名</label>
                             <input name="screen_name" value="{{$user->UserProfile->screen_name}}" type="text" id="screen_name" required class="w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-gray-500 placeholder-opacity-50" placeholder="アカウント太郎">

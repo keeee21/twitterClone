@@ -10,7 +10,7 @@
     
     <div flex justify-around items-center>
         <div class="w-11/12 max-w-screen-md m-auto">
-            <div>
+            <div class="flex justify-around items-center my-5" >
                 @if($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -20,10 +20,21 @@
                     </ul>
                 </div>
                 @endif
+                @if(session('success'))
+                    <div>
+                        <p class="text-green-700">{{session('success')}}</p>
+                    </div>
+                @endif
+                @if(session('error'))
+                    <div>
+                        <p class="text-red-600">{{session('error')}}</p>
+                    </div>
+                @endif
+            </div>
 
                 <div class="my-5 p-5 border bg-white">
                     <div class="flex justify-end">
-                        <a href="{{route('profile.edit')}}" class="inline-flex items-center px-4 py-2 bg-white-800 border border-blue-700 border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:text-white hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150" >プロフィールを編集する</a>
+                        <a href="{{route('profile.edit',['id' => $user->id])}}" class="inline-flex items-center px-4 py-2 bg-white-800 border border-blue-700 border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:text-white hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150" >プロフィールを編集する</a>
                     </div>
                     <div class="mb-8 w-full">
                         @if(empty($user->UserProfile->header_image))
@@ -98,8 +109,6 @@
                         </div>
                     @endforeach
                 </div>
-
-            </div>
         </div>
     </div>
 </x-app-layout>

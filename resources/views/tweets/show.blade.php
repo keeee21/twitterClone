@@ -72,7 +72,7 @@
                 </div>    
             </div>
                 <div>
-                    <a href="{{route('favorite.users',['id'=>$tweet->id])}}" class="hover:text-blue-700">{{$numOfFavoriteBtn}}件のいいね</a>
+                    <a href="{{route('favorite.users',['id'=>$tweet->id])}}" class="hover:text-blue-700">{{$numOfPushedFavoriteBtn}}件のいいね</a>
                 </div>
 
             {{-- リプのフォーム表示 --}}

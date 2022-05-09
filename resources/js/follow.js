@@ -1,12 +1,13 @@
 'use strict';
 
+const { stringify } = require("postcss");
+
 $(function (){
 
   $('.follow').on('click', function(){
 
     const classFollow = $(this);
     let followUserId = classFollow.data('user-id');
-    console.log(followUserId);
 
     //ajax処理スタート
     $.ajax({
@@ -23,7 +24,8 @@ $(function (){
     })
     //通信成功した時の処理
     .done(function (data) {
-      console.log('success ajax');
+      const responseJSON = JSON.parse(data);
+      console.log(responseJSON.status);
       classFollow.toggleClass("pushedFollow");
       $('.pushedFollow').text('フォロー解除');
       classFollow.toggleClass("pushedUnFollow");
@@ -31,7 +33,6 @@ $(function (){
     })
     //通信失敗した時の処理
     .fail(function (error) {
-      console.log('通信失敗');
       console.log(error); 
     });
   });

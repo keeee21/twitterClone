@@ -22,6 +22,7 @@ class FavoriteController extends Controller
         } else { //もし既にいいねしてたら
             $isAlreadyFavorite->delete();
         }
+        return response()->json(['status' => 200]);
     }
 
     public function favoriteTweets()

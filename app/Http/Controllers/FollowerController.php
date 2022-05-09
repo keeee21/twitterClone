@@ -23,6 +23,8 @@ class FollowerController extends Controller
             $follow = $isAlreadyFollow;
             $follow->delete();
         }
+        
+        return response()->json(['status' => 200]);
     }
 
     public function showFollowingUser()
