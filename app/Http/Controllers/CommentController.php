@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Redirect;
 
 class CommentController extends Controller
 {
-    public function store(CommentRequest $request, $tweet)
+    public function store(CommentRequest $request, $tweetId)
     {
         //リプを保存する
         $comment = new Comment;
         $comment->user_id = auth()->id();
-        $comment->tweet_id = $tweet;
+        $comment->tweet_id = $tweetId;
         $comment->reply = $request->reply;
 
         if(Auth::user()->checkAuthUserId($comment->user_id)){

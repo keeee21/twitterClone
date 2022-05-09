@@ -38,9 +38,6 @@ class ProfileController extends Controller
 
     public function edit($id)
     {
-        // $user = User::find(Auth::id());
-        // return view('profiles.edit',compact('user'));
-
         $user = User::find($id);
         if(is_null($user)){
             abort(404);

@@ -7,7 +7,6 @@ use App\Traits\saveImage;
 use App\Models\Tweet;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 
 class TweetController extends Controller
@@ -66,7 +65,6 @@ class TweetController extends Controller
         $request->validate(self::RULES);
 
         $updateTweet = Tweet::find($id);
-
         $updateTweet->content = $request->content;
         $updateTweet->image = $this->saveImage($request->tweetImage);
 
