@@ -91,7 +91,7 @@
                 </form>
             </div>
 
-            {{-- リプの表示 --}}
+        {{-- リプの表示 --}}
             <div class="max-w-screen-md m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                 @foreach($comments as $comment)
                     <div class="border">

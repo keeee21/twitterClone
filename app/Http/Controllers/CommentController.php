@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Http\Requests\CommentRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 
 class CommentController extends Controller
 {
@@ -16,18 +15,17 @@ class CommentController extends Controller
         $comment->user_id = auth()->id();
         $comment->tweet_id = $tweetId;
         $comment->reply = $request->reply;
-
-        if(Auth::user()->checkAuthUserId($comment->user_id)){
-            $comment->save();
-            return Redirect()->back();
-        }
-        return Redirect::back()->with('error','許可されていない操作です');
+        $comment->save();
+        
+        return redirect()->back();
     }
 
     public function destroy($id)
     {
         $user = Auth::user();
         $destroyingComment = Comment::find($id);
+
+        //削除する主体と、削除されるリプを送信した主体が同一人物が判定する
         if($user->checkAuthUserId($destroyingComment->user_id)){
             $destroyingComment->delete();
             return redirect()->route('tweet.show',['id' => $destroyingComment->tweet_id])->with('success','完全に削除しました');
