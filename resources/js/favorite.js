@@ -12,7 +12,7 @@ $(function (){
       headers: { //HTTPヘッダ情報をヘッダ名と値
         'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
       },  //↑name属性がcsrf-tokenのmetaタグのcontent属性の値を取得
-      url: 'users/favorite/'+favoriteTweetId, 
+      url: '/users/favorite/'+favoriteTweetId, 
       type: 'POST', //HTTPメソッドの種別を指定
       cache:false,
       dataType:'html',
