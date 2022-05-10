@@ -42,6 +42,11 @@
                 <p class="text-red-600">{{session('error')}}</p>
             </div>
         @endif
+        @if(session('success'))
+            <div>
+                <p class="text-green-600">{{session('success')}}</p>
+            </div>
+        @endif
     </div>
 
     <div class="max-w-screen-md m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">

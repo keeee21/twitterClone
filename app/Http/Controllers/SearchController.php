@@ -10,7 +10,6 @@ class SearchController extends Controller
 {
     public function show(SearchRequest $request)
     {
-
         $keyword = $request->keyword;
 
         //allだった場合

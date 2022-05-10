@@ -81,7 +81,7 @@ class TweetController extends Controller
         $tweet = Tweet::find($id);
         if($user->checkAuthUserId($tweet->user_id)){
             $tweet->delete();
-            return redirect()->route('profile.index')->with('success','完全に削除しました');
+            return redirect()->route('dashboard')->with('success','完全に削除しました');
         }
         return redirect()->route('dashboard')->with('error','許可されていない操作です');
     }
@@ -92,5 +92,4 @@ class TweetController extends Controller
         $user = new User;
         return view('dashboard',compact('tweets','user'));
     }
-
 }
