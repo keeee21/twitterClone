@@ -4,7 +4,7 @@
             <a href="{{route('dashboard')}}"><h2 class="mx-5 font-semibold text-xl text-gray-800 leading-tight">タイムライン</h2></a>
             <a href="{{route('tweet.create')}}"><h2 class="mx-5 text-xl text-gray-400 leading-tight">ツイートする</h2></a>
             <a href="{{route('user.index')}}"><h2 class="mx-5  text-xl text-gray-400 leading-tight">ユーザー一覧</h2></a>
-            <a href="{{route('profile.index')}}"><h2 class="mx-5  text-xl text-gray-400 leading-tight">マイページ</h2></a>
+            <a href="{{route('profile.index')}}"><h2 class="mx-5 text-xl text-gray-400 leading-tight">マイページ</h2></a>
         </div>    
     </x-slot>
 

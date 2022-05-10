@@ -67,7 +67,10 @@ class User extends Authenticatable
 
     public function checkAuthUserId($user_id)
     {
-        return $this->id == $user_id;
+        if ($this->id == $user_id){
+            return true;
+        }
+        return false;
     }
 
     public function tweets()
@@ -77,7 +80,7 @@ class User extends Authenticatable
 
     public function userProfile()
     {
-            return $this->hasOne(UserProfile::class);
+        return $this->hasOne(UserProfile::class);
     }
 
     //いいね

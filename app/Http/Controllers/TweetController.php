@@ -90,6 +90,7 @@ class TweetController extends Controller
     {
         $tweets = Tweet::orderBy('created_at','desc')->get();
         $user = new User;
+        
         return view('dashboard',compact('tweets','user'));
     }
 }

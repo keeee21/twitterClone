@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function store(CommentRequest $request, $tweetId)
+    public function store(CommentRequest $request, int $tweetId)
     {
         //リプを保存する
         $comment = new Comment;
@@ -20,12 +20,12 @@ class CommentController extends Controller
         return redirect()->back();
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $user = Auth::user();
         $destroyingComment = Comment::find($id);
 
-        //削除する主体と、削除されるリプを送信した主体が同一人物が判定する
+        //削除するユーザーidと、削除されるリプを送信したユーザーidが同じかを判定する
         if($user->checkAuthUserId($destroyingComment->user_id)){
             $destroyingComment->delete();
             return redirect()->route('tweet.show',['id' => $destroyingComment->tweet_id])->with('success','完全に削除しました');

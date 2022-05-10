@@ -111,7 +111,7 @@
                                         <img class="w-20 h-20 rounded" src="{{asset($comment->users->userProfile->icon_image)}}" width="100" height="100">
                                     @endif
                             </div>
-                        <div class="my-5 font-semibold">{{ $comment->users->userProfile->screen_name }}</div>
+                            <div class="my-5 font-semibold">{{ $comment->users->userProfile->screen_name }}</div>
                         </div>
                         <div class="my-5 ml-5">{{ $comment->reply }}</div>
                     </div>
