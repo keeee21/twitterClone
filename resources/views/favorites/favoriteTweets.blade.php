@@ -16,9 +16,9 @@
                     <div class="flex focus:outline-none">
                         <div class="m-5">
                             @if(is_null($favoriteTweet->Tweet->User->UserProfile->icon_image))
-                                <img class="w-20 h-20 rounded-full border" src="{{asset('storage/images/no_image.png')}}" width="100" height="100">
+                                <img class="w-20 h-20 rounded-full border" src="{{asset('storage/images/no_image.png')}}">
                             @else
-                                <img class="w-20 h-20 rounded-full border" src="{{asset($favoriteTweet->Tweet->User->UserProfile->icon_image)}}" width="100" height="100">
+                                <img class="w-20 h-20 rounded-full border" src="{{asset($favoriteTweet->Tweet->User->UserProfile->icon_image)}}">
                             @endif
                         </div>
                         <div class="my-5 font-semibold">{{ $favoriteTweet->tweet->user->userProfile->screen_name }}</div>
@@ -26,7 +26,7 @@
                     <div class="my-5 ml-5">{{ $favoriteTweet->tweet->content }}</div>
                     <div class="flex justify-around">
                         @if(!is_null($favoriteTweet->tweet->image))
-                        <img class="w-50 h-50 rounded" src="{{asset($favoriteTweet->tweet->image)}}" width="100" height="100">
+                        <img class="w-20 h-20 rounded" src="{{asset($favoriteTweet->tweet->image)}}">
                         @endif
                     </div>
                     <div class="flex justify-end mr-3 text-s">{{ $favoriteTweet->tweet->updated_at }}</div>

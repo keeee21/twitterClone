@@ -16,9 +16,9 @@
                     <div class="flex focus:outline-none">
                         <div class="m-5">
                             @if(is_null($follow->UserProfile->icon_image))
-                                <img class="w-20 h-20 rounded-full border" src="{{asset('storage/images/no_image.png')}}" width="100" height="100">
+                                <img class="w-20 h-20 rounded-full border" src="{{asset('storage/images/no_image.png')}}">
                             @else
-                                <img class="w-20 h-20 rounded-full border" src="{{asset($follow->UserProfile->icon_image)}}" width="100" height="100">
+                                <img class="w-20 h-20 rounded-full border" src="{{asset($follow->UserProfile->icon_image)}}">
                             @endif
                         </div>
                         <div class="my-5">{{ $follow->UserProfile->screen_name }}</div>

@@ -16,9 +16,9 @@
                         <div class="flex focus:outline-none">
                             <div class="m-2">
                                 @if(is_null($favoriteUser->User->UserProfile->icon_image))
-                                    <img class="w-20 h-20 rounded-full border" src="{{asset('storage/images/no_image.png')}}" width="100" height="100">
+                                    <img class="w-20 h-20 rounded-full border" src="{{asset('storage/images/no_image.png')}}">
                                 @else
-                                    <img class="w-20 h-20 rounded-full border" src="{{asset($favoriteUser->User->UserProfile->icon_image)}}" width="100" height="100">
+                                    <img class="w-20 h-20 rounded-full border" src="{{asset($favoriteUser->User->UserProfile->icon_image)}}">
                                 @endif
                             </div>
                             <div class="my-5 font-semibold">{{ $favoriteUser->User->UserProfile->screen_name }}</div>

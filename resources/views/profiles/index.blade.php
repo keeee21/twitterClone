@@ -46,9 +46,9 @@
                 <div class="mb-8">
                     <div>
                         @if(empty($user->UserProfile->icon_image))
-                            <img class="w-20 h-20 rounded-full border" src="{{asset('storage/images/no_image.png')}}" width="100" height="100">
+                            <img class="w-20 h-20 rounded-full border" src="{{asset('storage/images/no_image.png')}}">
                         @else
-                            <img class="w-20 h-20 rounded-full border" src="{{asset($user->UserProfile->icon_image)}}" width="100" height="100">
+                            <img class="w-20 h-20 rounded-full border" src="{{asset($user->UserProfile->icon_image)}}">
                         @endif
                     </div>
                 </div>
@@ -81,9 +81,9 @@
                             <div class="flex focus:outline-none">
                                 <div class="m-5">
                                     @if(is_null($tweet->User->UserProfile->icon_image))
-                                        <img class="w-20 h-20 rounded-full border" src="{{asset('storage/images/no_image.png')}}" width="100" height="100">
+                                        <img class="w-20 h-20 rounded-full border" src="{{asset('storage/images/no_image.png')}}">
                                     @else
-                                        <img class="w-20 h-20 rounded-full border" src="{{asset($tweet->User->UserProfile->icon_image)}}" width="100" height="100">
+                                        <img class="w-20 h-20 rounded-full border" src="{{asset($tweet->User->UserProfile->icon_image)}}">
                                     @endif
                                 </div>
                                 <div class="my-5 font-semibold">{{ $tweet->User->UserProfile->screen_name }}</div>
@@ -91,7 +91,7 @@
                             <div class="my-5 ml-5">{{ $tweet->content }}</div>
                             <div class="flex justify-around">
                                 @if(!is_null($tweet->image))
-                                    <img class="w-50 h-50 rounded border" src="{{asset($tweet->image)}}" width="100" height="100">
+                                    <img class="w-20 h-20 rounded border" src="{{asset($tweet->image)}}">
                                 @endif
                             </div>
                         </a>
