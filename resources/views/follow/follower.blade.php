@@ -9,7 +9,7 @@
     </x-slot>
     
     {{-- フォローしてくれた人たち表示 --}}
-    <div class="max-w-screen-md m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+    <div class="max-w-screen-md m-auto mt-5 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
         @foreach($followers as $follower)
             <div class="border py-5">
                 <a href="{{route('profile.show',['id' => $follower->UserProfile->user_id])}}">

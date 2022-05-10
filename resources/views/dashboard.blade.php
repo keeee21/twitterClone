@@ -49,7 +49,7 @@
         @endif
     </div>
 
-    <div class="max-w-screen-md m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+    <div class="max-w-screen-md m-auto mt-5 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
             @foreach($tweets as $tweet)
                 @if($user->canFollow($tweet->user_id) || $tweet->user_id == Auth::id())
                 <div class="border py-5">
