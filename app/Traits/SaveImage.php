@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-trait saveImage
+trait SaveImage
 {
     private function saveImage($image)
     {

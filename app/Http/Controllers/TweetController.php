@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use App\Traits\saveImage;
+use App\Traits\SaveImage;
 use App\Models\Tweet;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class TweetController extends Controller
 {
-    use saveImage;
+    use SaveImage;
 
     const RULES = [
         'content' => 'required|string|max:140',

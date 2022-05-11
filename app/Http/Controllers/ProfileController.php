@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\saveImage;
+use App\Traits\SaveImage;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    use saveImage;
+    use SaveImage;
 
     const RULES = [
         'screen_name' => 'required|string|max:30',
