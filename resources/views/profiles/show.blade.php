@@ -12,7 +12,7 @@
         <div class="w-11/12 max-w-screen-md m-auto">
             <div class="mb-5">
                 @if(is_null($user->UserProfile->header_image))
-                    <img class="w-15 h-15 rounded" src="{{asset('storage/images/no_image.png')}}" width="100" height="100">
+                    <img class="w-15 h-15 rounded" src="{{asset('images/no_image.png')}}" width="100" height="100">
                 @else
                     <img class="w-15 h-15 rounded" src="{{asset($user->UserProfile->header_image)}}" width="100" height="100">
                 @endif
@@ -29,7 +29,7 @@
                 <div class="flex">
                     <div class="m-5">
                         @if(empty($user->UserProfile->icon_image))
-                            <img class="w-20 h-20 rounded-full" src="{{asset('storage/images/no_image.png')}}">
+                            <img class="w-20 h-20 rounded-full" src="{{asset('images/no_image.png')}}">
                         @else
                             <img class="w-20 h-20 rounded-full" src="{{asset($user->UserProfile->icon_image)}}">
                         @endif
@@ -62,7 +62,7 @@
                         <div class="flex focus:outline-none">
                             <div class="m-5">
                                 @if(empty($user->UserProfile->icon_image))
-                                    <img class="w-20 h-20 rounded-full" src="{{asset('storage/images/no_image.png')}}">
+                                    <img class="w-20 h-20 rounded-full" src="{{asset('images/no_image.png')}}">
                                 @else
                                     <img class="w-20 h-20 rounded-full" src="{{asset($user->UserProfile->icon_image)}}">
                                 @endif

@@ -22,7 +22,7 @@
                       <div class="flex justify-around focus:outline-none">
                         <div class="m-5">
                             @if(is_null($searchedAccount->icon_image))
-                              <img class="w-20 h-20 rounded-full" src="{{asset('storage/images/no_image.png')}}">
+                              <img class="w-20 h-20 rounded-full" src="{{asset('images/no_image.png')}}">
                             @else
                               <img class="w-20 h-20 rounded-full" src="{{asset($searchedAccount->icon_image)}}">
                             @endif
@@ -56,7 +56,7 @@
                       <div class="flex justify-around focus:outline-none">
                         <div class="m-5">
                           @if(is_null($searchedTweet->User->UserProfile->icon_image))
-                            <img class="w-20 h-20 rounded-full" src="{{asset('storage/images/no_image.png')}}">
+                            <img class="w-20 h-20 rounded-full" src="{{asset('images/no_image.png')}}">
                           @else
                             <img class="w-20 h-20 rounded-full" src="{{asset($searchedTweet->User->UserProfile->icon_image)}}">
                           @endif

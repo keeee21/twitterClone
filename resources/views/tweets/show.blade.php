@@ -47,7 +47,7 @@
                         <div class="flex focus:outline-none">
                             <div class="m-5">
                                     @if(is_null($tweet->user->userProfile->icon_image))
-                                        <img class="w-20 h-20 rounded" src="{{asset('storage/images/no_image.png')}}">
+                                        <img class="w-20 h-20 rounded" src="{{asset('images/no_image.png')}}">
                                     @else
                                         <img class="w-20 h-20 rounded" src="{{asset($tweet->user->userProfile->icon_image)}}">
                                     @endif
@@ -106,7 +106,7 @@
                         <div class="flex focus:outline-none">
                             <div class="m-5">
                                     @if(is_null($comment->users->userProfile->icon_image))
-                                        <img class="w-20 h-20 rounded" src="{{asset('storage/images/no_image.png')}}">
+                                        <img class="w-20 h-20 rounded" src="{{asset('images/no_image.png')}}">
                                     @else
                                         <img class="w-20 h-20 rounded" src="{{asset($comment->users->userProfile->icon_image)}}">
                                     @endif

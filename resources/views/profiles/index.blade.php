@@ -38,7 +38,7 @@
                 </div>
                 <div class="mb-8 w-full">
                     @if(empty($user->UserProfile->header_image))
-                        <img class="w-full round border" src="{{asset('storage/images/no_image.png')}}" width="100" height="100">
+                        <img class="w-full round border" src="{{asset('images/no_image.png')}}" width="100" height="100">
                     @else
                         <img class="w-full round border" src="{{asset($user->UserProfile->header_image)}}" width="100" height="100">
                     @endif
@@ -46,7 +46,7 @@
                 <div class="mb-8">
                     <div>
                         @if(empty($user->UserProfile->icon_image))
-                            <img class="w-20 h-20 rounded-full border" src="{{asset('storage/images/no_image.png')}}">
+                            <img class="w-20 h-20 rounded-full border" src="{{asset('images/no_image.png')}}">
                         @else
                             <img class="w-20 h-20 rounded-full border" src="{{asset($user->UserProfile->icon_image)}}">
                         @endif
@@ -81,7 +81,7 @@
                             <div class="flex focus:outline-none">
                                 <div class="m-5">
                                     @if(is_null($tweet->User->UserProfile->icon_image))
-                                        <img class="w-20 h-20 rounded-full border" src="{{asset('storage/images/no_image.png')}}">
+                                        <img class="w-20 h-20 rounded-full border" src="{{asset('images/no_image.png')}}">
                                     @else
                                         <img class="w-20 h-20 rounded-full border" src="{{asset($tweet->User->UserProfile->icon_image)}}">
                                     @endif
