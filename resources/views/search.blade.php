@@ -64,6 +64,7 @@
                         <div class="my-5">{{$searchedTweet->User->UserProfile->screen_name}}</div>
                       </div>
                       <div class="flex justify-around">{{$searchedTweet->content}}</div>
+                    </a>
                       <div>
                           @if(!$searchedTweet->user->canFavorite($searchedTweet->id))
                               <button data-tweet-id="{{$searchedTweet->id}}" id="{{$searchedTweet->id}}" class="favorite btn">いいね</button>
@@ -71,7 +72,6 @@
                               <button data-tweet-id="{{$searchedTweet->id}}" id="{{$searchedTweet->id}}" class="favorite pushedFavorite">いいね</button>
                           @endif
                       </div>
-                    </a>
                   </div>
                 @endforeach
               @endif
