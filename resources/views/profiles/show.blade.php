@@ -10,7 +10,7 @@
     
     <div flex justify-around items-center>
         <div class="w-11/12 max-w-screen-md m-auto">
-            <div class="mb-5">
+            <div class="my-5">
                 @if(is_null($user->UserProfile->header_image))
                     <img class="w-15 h-15 rounded" src="{{asset('images/no_image.png')}}" width="100" height="100">
                 @else
@@ -70,13 +70,13 @@
                                 @endif
                             </div>
                             <div class="my-5 font-semibold">{{ $tweet->content }}</div>
-                            <div class="m-5 text-s">{{ $tweet->updated_at }}</div>
                         </div>
                         <div class=" flex justify-around">
                             @if(!is_null($tweet->image))
-                                <img class="w-20 h-20 rounded" src="{{asset($tweet->image)}}">
+                            <img class="w-20 h-20 rounded" src="{{asset($tweet->image)}}">
                             @endif
                         </div>
+                        <div class="flex justify-end m-5 text-s">{{ $tweet->updated_at }}</div>
                     </a>
                         <div class="flex">
                             @if(!$user->canFavorite($tweet->id))                                        
