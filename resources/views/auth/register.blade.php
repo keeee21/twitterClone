@@ -23,7 +23,7 @@
             <div class="mt-4">
                 <x-label for="screen_name" :value="__('*アカウント名')" />
 
-                <x-input id="screen_name" placeholder="Twitterで表示される名前" class="block mt-1 w-full" type="text" name="screen_name" required/>
+                <x-input id="screen_name" placeholder="Oketterで表示される名前" class="block mt-1 w-full" type="text" name="screen_name" required/>
             </div>
 
             <!-- Email Address -->
@@ -35,7 +35,7 @@
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('*パスワード')" />
+                <x-label for="password" :value="__('*パスワード (8文字以上)')" />
 
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
@@ -52,7 +52,7 @@
                                 name="password_confirmation" required />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-end mt-4 space-x-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                     {{ __('以前に登録した方はこちら') }}
                 </a>
