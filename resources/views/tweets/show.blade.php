@@ -106,9 +106,9 @@
                         <div class="flex focus:outline-none">
                             <div class="m-5">
                                     @if(is_null($comment->users->userProfile->icon_image))
-                                        <img class="w-20 h-20 rounded" src="{{asset('images/no_image.png')}}">
+                                        <img class="w-20 h-20 rounded border" src="{{asset('images/no_image.png')}}">
                                     @else
-                                        <img class="w-20 h-20 rounded" src="{{asset($comment->users->userProfile->icon_image)}}">
+                                        <img class="w-20 h-20 rounded border" src="{{asset($comment->users->userProfile->icon_image)}}">
                                     @endif
                             </div>
                             <div class="my-5 font-semibold">{{ $comment->users->userProfile->screen_name }}</div>
