@@ -20,10 +20,12 @@
 
             <div class="max-w-screen-md m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <div class="flex justify-end m-3">
-                    @if(!$user->canFollow($user->id))
-                        <button data-user-id="{{$user->id}}" id="{{$user->id}}" class="follow pushedUnFollow inline-flex items-center px-4 py-2 my-5 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">フォロー</button>
-                    @else
-                        <button data-user-id="{{$user->id}}" id="{{$user->id}}" class="follow pushedFollow inline-flex items-center px-4 py-2 my-5 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">フォロー解除</button>
+                    @if($user->id !== Auth::id())
+                        @if(!$user->canFollow($user->id))
+                            <button data-user-id="{{$user->id}}" id="{{$user->id}}" class="follow pushedUnFollow inline-flex items-center px-4 py-2 my-5 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">フォロー</button>
+                        @else
+                            <button data-user-id="{{$user->id}}" id="{{$user->id}}" class="follow pushedFollow inline-flex items-center px-4 py-2 my-5 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">フォロー解除</button>
+                        @endif
                     @endif
                 </div>
                 <div class="flex">
