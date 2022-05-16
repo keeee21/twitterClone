@@ -10,22 +10,22 @@
     
     {{-- ツイートにいいねを押した人たちを表示 --}}
     <div class="max-w-screen-md m-auto mt-5 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-            @foreach($favoriteUsers as $favoriteUser)
-                <div class="border py-5">
-                    <a href="{{route('profile.show',['id' => $favoriteUser->User->UserProfile->user_id])}}">
-                        <div class="flex focus:outline-none">
-                            <div class="m-2">
-                                @if(is_null($favoriteUser->User->UserProfile->icon_image))
-                                    <img class="w-20 h-20 rounded-full border" src="{{asset('images/no_image.png')}}">
-                                @else
-                                    <img class="w-20 h-20 rounded-full border" src="{{asset($favoriteUser->User->UserProfile->icon_image)}}">
-                                @endif
-                            </div>
-                            <div class="my-5 font-semibold">{{ $favoriteUser->User->UserProfile->screen_name }}</div>
+        @foreach($favoriteUsers as $favoriteUser)
+            <div class="border py-5">
+                <a href="{{route('profile.show',['id' => $favoriteUser->User->UserProfile->user_id])}}">
+                    <div class="flex focus:outline-none">
+                        <div class="m-2">
+                            @if(is_null($favoriteUser->User->UserProfile->icon_image))
+                                <img class="w-20 h-20 rounded-full border" src="{{asset('images/no_image.png')}}">
+                            @else
+                                <img class="w-20 h-20 rounded-full border" src="{{asset($favoriteUser->User->UserProfile->icon_image)}}">
+                            @endif
                         </div>
-                        <div class="my-5">{{ $favoriteUser->User->UserProfile->description }}</div>
-                    </a>
-                </div>
-            @endforeach
-        </div>
+                        <div class="my-5 font-semibold">{{ $favoriteUser->User->UserProfile->screen_name }}</div>
+                    </div>
+                    <div class="my-5">{{ $favoriteUser->User->UserProfile->description }}</div>
+                </a>
+            </div>
+        @endforeach
+    </div>
 </x-app-layout>
