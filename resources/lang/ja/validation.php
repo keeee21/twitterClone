@@ -163,6 +163,7 @@ return [
         'header_image' => 'ヘッダー',
         'keyword' => '検索するキーワード',
         'reply' => 'リプ',
+        'tweetImage' => '選択するファイル',
     ],
 
 ];
