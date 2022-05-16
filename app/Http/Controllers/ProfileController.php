@@ -14,6 +14,8 @@ class ProfileController extends Controller
 
     const RULES = [
         'screen_name' => 'required|string|max:30',
+        'description' => 'nullable|string|max:50',
+        'location' => 'nullable|string|max:30',
         'url' => 'nullable|url',
         'icon_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         'header_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'

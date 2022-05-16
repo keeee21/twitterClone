@@ -164,6 +164,8 @@ return [
         'keyword' => '検索するキーワード',
         'reply' => 'リプ',
         'tweetImage' => '選択するファイル',
+        'description' => '自己紹介',
+        'location' => '場所',
     ],
 
 ];
