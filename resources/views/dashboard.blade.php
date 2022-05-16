@@ -67,7 +67,7 @@
                         <div class="my-5 ml-5">{{ $tweet->content }}</div>
                         <div class="flex justify-around">
                                 @if(!is_null($tweet->image))
-                                    <img class="w-20 h-20 rounded border" src="{{asset($tweet->image)}}">
+                                    <img class="w-20 h-20 rounded" src="{{asset($tweet->image)}}">
                                 @endif
                         </div>
                     </a>
