@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-around">
-            <a href="{{route('dashboard')}}"><h2 class="mx-5  text-xl text-gray-400 leading-tight">タイムライン</h2></a>
-            <a href="{{route('tweet.create')}}"><h2 class="mx-5 text-xl text-gray-400 leading-tight">ツイートする</h2></a>
-            <a href="{{route('user.index')}}"><h2 class="mx-5  text-xl text-gray-400 leading-tight">ユーザー一覧</h2></a>
-            <a href="{{route('profile.index')}}"><h2 class="mx-5 font-semibold text-xl text-gray-800 leading-tight">マイページ</h2></a>
+            <a href="{{route('dashboard')}}"><h2 class="mx-5  text-xl text-gray-400 leading-tight hover:text-blue-700">タイムライン</h2></a>
+            <a href="{{route('tweet.create')}}"><h2 class="mx-5 text-xl text-gray-400 leading-tight hover:text-blue-700">ツイートする</h2></a>
+            <a href="{{route('user.index')}}"><h2 class="mx-5  text-xl text-gray-400 leading-tight hover:text-blue-700">ユーザー一覧</h2></a>
+            <a href="{{route('profile.index')}}"><h2 class="mx-5 font-semibold text-xl text-gray-800 leading-tight hover:text-blue-700">マイページ</h2></a>
         </div>   
     </x-slot>
     
@@ -48,9 +48,9 @@
                 <div class="w-full border-b bg-white focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-opacity-50">{{$user->UserProfile->url}}</div>
             </div>
             <div class="flex justify-around">
-                <a href="{{route('follow.show')}}">フォロー数:{{$user->followCount()}}</a>
-                <a href="{{route('follower.show')}}">フォロワー数:{{$user->followerCount()}}</a>
-                <a href="{{route('favorite.tweets')}}">いいねしたツイート:{{$user->favoriteCount()}}</a>
+                <a href="{{route('follow.show')}}" class="hover:text-blue-700">フォロー数:{{$user->followCount()}}</a>
+                <a href="{{route('follower.show')}}" class="hover:text-blue-700">フォロワー数:{{$user->followerCount()}}</a>
+                <a href="{{route('favorite.tweets')}}" class="hover:text-blue-700">いいねしたツイート:{{$user->favoriteCount()}}</a>
             </div>
         </div>
         <div class="max-w-screen-md m-auto my-5 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">

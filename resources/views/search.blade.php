@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-around">
-            <a href="{{route('dashboard')}}"><h2 class="mx-5 text-xl text-gray-400 leading-tight">タイムライン</h2></a>
-            <a href="{{route('tweet.create')}}"><h2 class="mx-5 text-xl text-gray-400 leading-tight">ツイートする</h2></a>
-            <a href="{{route('user.index')}}"><h2 class="mx-5 font-semibold text-xl text-gray-800 leading-tight">ユーザー一覧</h2></a>
-            <a href="{{route('profile.index')}}"><h2 class="mx-5  text-xl text-gray-400 leading-tight">マイページ</h2></a>
+            <a href="{{route('dashboard')}}"><h2 class="mx-5 text-xl text-gray-400 leading-tight hover:text-blue-700">タイムライン</h2></a>
+            <a href="{{route('tweet.create')}}"><h2 class="mx-5 text-xl text-gray-400 leading-tight hover:text-blue-700">ツイートする</h2></a>
+            <a href="{{route('user.index')}}"><h2 class="mx-5 font-semibold text-xl text-gray-800 leading-tight hover:text-blue-700">ユーザー一覧</h2></a>
+            <a href="{{route('profile.index')}}"><h2 class="mx-5  text-xl text-gray-400 leading-tight hover:text-blue-700">マイページ</h2></a>
         </div>     
     </x-slot>
 
@@ -46,9 +46,9 @@
 
       {{-- ツイート表示 --}}
 
+      @if(!is_null($searchedTweets))
       <div class="max-w-screen-md mt-20 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
         <h2 class="bg-gray-300">ツイート</h2>
-        @if(!is_null($searchedTweets))
           @foreach($searchedTweets as $searchedTweet)
             <div class="border py-5">
               <a href="{{route('tweet.show',['id' => $searchedTweet->id])}}">
@@ -77,11 +77,11 @@
                   @endif
               </div>
               <div class="mt-2 mx-5 text-s flex justify-end">{{$searchedTweet->updated_at}}</div>
+              @endforeach
             </div>
-          @endforeach
-        </div>
+      </div>
       @else
-        <p class="mt-10">表示するツイートはありません</p>
+          <p class="mt-10">表示するツイートはありません</p>
       @endif
     </div>
 </x-app-layout>
