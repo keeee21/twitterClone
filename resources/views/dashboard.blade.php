@@ -30,44 +30,43 @@
     <x-session-message />
 
     <div class="max-w-screen-md m-auto mt-5 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-            @foreach($tweets as $tweet)
-                @if($user->canFollow($tweet->user_id) || $tweet->user_id == Auth::id())
-                <div class="border py-5">
-                    <a href="{{route('tweet.show',['id' => $tweet->id])}}">
-                        <div class="flex focus:outline-none">
-                            <div class="m-5">
-                                @if(is_null($tweet->User->UserProfile->icon_image))
-                                    <img class="w-20 h-20 rounded-full border" src="{{asset('images/no_image.png')}}" >
-                                @else
-                                    <img class="w-20 h-20 rounded-full border" src="{{asset($tweet->User->UserProfile->icon_image)}}">
-                                @endif
-                            </div>
-                            <div class="my-5 font-semibold">{{ $tweet->User->UserProfile->screen_name }}</div>
-                        </div>
-                        <div class="my-5 ml-5">{{ $tweet->content }}</div>
-                        <div class="flex justify-around">
-                                @if(!is_null($tweet->image))
-                                    <img class="w-20 h-20 rounded" src="{{asset($tweet->image)}}">
-                                @endif
-                        </div>
-                    </a>
-                    <div class="flex justify-content">
-                        <div>
-                            @if(!$user->canFavorite($tweet->id))
-                                <button data-tweet-id="{{$tweet->id}}" id="{{$tweet->id}}" class="favorite btn">いいね</button>
+        @foreach($tweets as $tweet)
+            @if($user->canFollow($tweet->user_id) || $tweet->user_id == Auth::id())
+            <div class="border py-5">
+                <a href="{{route('tweet.show',['id' => $tweet->id])}}">
+                    <div class="flex focus:outline-none">
+                        <div class="m-5">
+                            @if(is_null($tweet->User->UserProfile->icon_image))
+                                <img class="w-20 h-20 rounded-full border" src="{{asset('images/no_image.png')}}" >
                             @else
-                                <button data-tweet-id="{{$tweet->id}}" id="{{$tweet->id}}" class="favorite pushedFavorite">いいね</button>
+                                <img class="w-20 h-20 rounded-full border" src="{{asset($tweet->User->UserProfile->icon_image)}}">
                             @endif
                         </div>
-                        <div class="mt-2">
-                            <a href="{{route('tweet.show',['id' => $tweet->id])}}" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900">リプする</a>
-                        </div>
+                        <div class="my-5 font-semibold">{{ $tweet->User->UserProfile->screen_name }}</div>
                     </div>
-                    <div class="mt-2 mx-5 text-s flex justify-end">{{ $tweet->updated_at }}</div>
+                    <div class="my-5 ml-5">{{ $tweet->content }}</div>
+                    <div class="flex justify-around">
+                            @if(!is_null($tweet->image))
+                                <img class="w-20 h-20 rounded" src="{{asset($tweet->image)}}">
+                            @endif
+                    </div>
+                </a>
+                <div class="flex justify-content">
+                    <div>
+                        @if(!$user->canFavorite($tweet->id))
+                            <button data-tweet-id="{{$tweet->id}}" id="{{$tweet->id}}" class="favorite btn">いいね</button>
+                        @else
+                            <button data-tweet-id="{{$tweet->id}}" id="{{$tweet->id}}" class="favorite pushedFavorite">いいね</button>
+                        @endif
+                    </div>
+                    <div class="mt-2">
+                        <a href="{{route('tweet.show',['id' => $tweet->id])}}" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900">リプする</a>
+                    </div>
                 </div>
-                @endif
-            @endforeach
-        </div>
+                <div class="mt-2 mx-5 text-s flex justify-end">{{ $tweet->updated_at }}</div>
+            </div>
+            @endif
+        @endforeach
     </div>
 </x-app-layout>
 
