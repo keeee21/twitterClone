@@ -23,7 +23,7 @@ class SearchController extends Controller
         //account検索だった場合
         if($request->category === 'account'){
             $searchedAccounts = UserProfile::where('screen_name','like','%'.$keyword.'%')->get();
-            $searchedTweets = null;
+            $searchedTweets = Tweet::where('content','like',"")->get();
 
             return view('search',compact('searchedAccounts','searchedTweets'));
         }
@@ -31,7 +31,7 @@ class SearchController extends Controller
         //tweet検索だった場合
         if($request->category === 'tweet'){
             $searchedTweets = Tweet::where('content','like','%'.$keyword.'%')->get();
-            $searchedAccounts = null;
+            $searchedAccounts = UserProfile::where('screen_name','like',"")->get();
 
             return view('search',compact('searchedTweets','searchedAccounts'));
         }
