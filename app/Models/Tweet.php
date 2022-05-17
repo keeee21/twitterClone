@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
 
 class Tweet extends Model
 {
@@ -35,5 +35,9 @@ class Tweet extends Model
     {
         $numOfPushedFavoriteBtn = count(Favorite::where('tweet_id',$tweetId)->get());
         return $numOfPushedFavoriteBtn;
+    }
+
+    public function isCreatedByUser($userId){
+        return $this->user_id === $userId;
     }
 }
