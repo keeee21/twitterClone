@@ -18,10 +18,12 @@
             @foreach($searchedAccounts as $searchedAccount)
               <div class="border py-5">
                 <div class="flex justify-end mr-3">
-                  @if(!$searchedAccount->User->canFollow($searchedAccount->User->id))
-                    <button data-user-id="{{$searchedAccount->User->id}}" id="{{$searchedAccount->User->id}}" class="follow pushedUnFollow inline-flex items-center px-4 py-2 mb-5 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">フォロー</button>
-                  @else
-                    <button data-user-id="{{$searchedAccount->User->id}}" id="{{$searchedAccount->User->id}}" class="follow pushedFollow inline-flex items-center px-4 py-2 mb-5 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">フォロー解除</button>
+                  @if($searchedAccount->user_id !== Auth::id())
+                    @if(!$searchedAccount->User->canFollow($searchedAccount->User->id))
+                      <button data-user-id="{{$searchedAccount->User->id}}" id="{{$searchedAccount->User->id}}" class="follow pushedUnFollow inline-flex items-center px-4 py-2 mb-5 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">フォロー</button>
+                    @else
+                      <button data-user-id="{{$searchedAccount->User->id}}" id="{{$searchedAccount->User->id}}" class="follow pushedFollow inline-flex items-center px-4 py-2 mb-5 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">フォロー解除</button>
+                    @endif
                   @endif
                 </div>
                 <a href="{{route('profile.show',['id' => $searchedAccount->user_id])}}">
