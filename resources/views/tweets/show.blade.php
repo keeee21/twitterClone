@@ -8,27 +8,7 @@
         </div>     
     </x-slot>
     
-    <div class="flex justify-around items-center my-5">
-        @if($errors->any())
-            <div class="mx-10">
-                <ul class="flex">
-                    @foreach($errors->all() as $error)
-                        <li class="text-red-700">{{$error}}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        @if(session('success'))
-            <div>
-                <p class="text-red-600">{{session('success')}}</p>
-            </div>
-        @endif
-        @if(session('error'))
-            <div>
-                <p class="text-red-600">{{session('error')}}</p>
-            </div>
-        @endif
-    </div>
+    <x-session-message />
         
     <div class="w-11/12 max-w-screen-md m-auto my-5">
         <div class="max-w-screen-md m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">

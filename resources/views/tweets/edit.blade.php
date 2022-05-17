@@ -8,17 +8,7 @@
         </div>     
     </x-slot>
     
-    <div class="flex justify-around items-center my-5">
-        @if($errors->any())
-            <div>
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li class="text-red-700">{{$error}}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-    </div>
+    <x-session-message />
 
     <div class="w-11/12 max-w-screen-md m-auto my-5">
         <div class="max-w-screen-md m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">

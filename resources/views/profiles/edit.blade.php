@@ -9,17 +9,7 @@
     </x-slot>
     
     <div class="w-11/12 max-w-screen-md m-auto">
-        <div class="flex justify-around items-center my-5">
-            @if($errors->any())
-                <div>
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li class="text-red-600">{{$error}}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-        </div>
+        <x-session-message />
 
         <div class="mt-8">
             <form method="POST" action="{{route('profile.update',['id' => $user->id])}}" enctype="multipart/form-data" class="w-10/12 mx-auto md:max-w-md">

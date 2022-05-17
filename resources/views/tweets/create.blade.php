@@ -9,17 +9,9 @@
     </x-slot>
     
     <div class="w-11/12 max-w-screen-md m-auto">
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul class="my-5">
-                    @foreach($errors->all() as $error)
-                        <li class="text-red-700">{{$error}}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        <x-session-message />
 
-        {{-- フォーム作成 --}}
+        {{-- ツイートフォーム --}}
         <div class="mt-5">
             <form method="POST" action="{{route('tweet.store')}}" enctype="multipart/form-data">
                 @csrf
