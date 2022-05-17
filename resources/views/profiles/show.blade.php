@@ -30,9 +30,9 @@
             <div class="flex">
                 <div class="m-5">
                     @if(empty($user->UserProfile->icon_image))
-                        <img class="w-20 h-20 rounded-full" src="{{asset('images/no_image.png')}}">
+                        <img class="w-20 h-20 rounded-full border" src="{{asset('images/no_image.png')}}">
                     @else
-                        <img class="w-20 h-20 rounded-full" src="{{asset($user->UserProfile->icon_image)}}">
+                        <img class="w-20 h-20 rounded-full border" src="{{asset($user->UserProfile->icon_image)}}">
                     @endif
                 </div>
                 <div class="my-5">
