@@ -41,9 +41,17 @@ class ProfileController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+
+        //$user が存在するか
         if(is_null($user)){
             abort(404);
         }
+        //編集するユーザー情報は、ログインユーザーが登録したものか
+        //Question: 認可の方法として下記if文は適切か、policyなど別の手段の方が適切か
+        if($user->id !== Auth::id()){
+            abort(404);
+        }
+
         return view('profiles.edit',compact('user'));
     }
 

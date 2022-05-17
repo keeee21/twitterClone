@@ -53,9 +53,17 @@ class TweetController extends Controller
     public function edit($id)
     {
         $tweet = Tweet::find($id);
+
+        //$tweetは存在するか
         if(is_null($tweet)){
             abort(404);
         }
+        //編集するツイートは、ログインユーザーがツイートしたものか
+        //Question: 認可の方法として下記if文は適切か、policyなど別の手段の方が適切か
+        if($tweet->user_id !== Auth::id()){
+            abort(404);
+        }
+
         $user = User::find(Auth::id());
         return view('tweets.edit',compact('user','tweet'));
     }
