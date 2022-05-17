@@ -13,16 +13,16 @@
     <div class="w-11/12 max-w-screen-md m-auto my-5">
         <div class="max-w-screen-md m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
             <div class="py-5">
-                    <div class="flex focus:outline-none">
-                        <div class="m-5">
-                                @if(is_null($user->userProfile->icon_image))
-                                    <img class="w-20 h-20 rounded" src="{{asset('images/no_image.png')}}">
-                                @else
-                                    <img class="w-20 h-20 rounded" src="{{asset($user->userProfile->icon_image)}}">
-                                @endif
-                        </div>
-                        <div class="my-5 font-semibold">{{ $user->userProfile->screen_name }}</div>
+                <div class="flex focus:outline-none">
+                    <div class="m-5">
+                            @if(is_null($user->userProfile->icon_image))
+                                <img class="w-20 h-20 rounded" src="{{asset('images/no_image.png')}}">
+                            @else
+                                <img class="w-20 h-20 rounded" src="{{asset($user->userProfile->icon_image)}}">
+                            @endif
                     </div>
+                    <div class="my-5 font-semibold">{{ $user->userProfile->screen_name }}</div>
+                </div>
                 <form method="POST" action="{{route('tweet.update',['id' => $tweet->id])}}" enctype="multipart/form-data">
                     @csrf
                     <div class="my-5 ml-5">

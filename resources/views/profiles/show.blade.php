@@ -77,16 +77,16 @@
                     </div>
                     <div class="flex justify-end m-5 text-s">{{ $tweet->updated_at }}</div>
                 </a>
-                    <div class="flex">
-                        @if(!$user->canFavorite($tweet->id))                                        
-                            <button data-tweet-id="{{$tweet->id}}" id="{{$tweet->id}}" class="favorite btn">いいね</button>
-                        @else
-                            <button data-tweet-id="{{$tweet->id}}" id="{{$tweet->id}}" class="favorite pushedFavorite">いいね</button>
-                        @endif
-                        <div class="mt-2">
-                            <a href="{{route('tweet.show',['id' => $tweet->id])}}" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900">リプする</a>
-                        </div>
+                <div class="flex">
+                    @if(!$user->canFavorite($tweet->id))                                        
+                        <button data-tweet-id="{{$tweet->id}}" id="{{$tweet->id}}" class="favorite btn">いいね</button>
+                    @else
+                        <button data-tweet-id="{{$tweet->id}}" id="{{$tweet->id}}" class="favorite pushedFavorite">いいね</button>
+                    @endif
+                    <div class="mt-2">
+                        <a href="{{route('tweet.show',['id' => $tweet->id])}}" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900">リプする</a>
                     </div>
+                </div>
             </div>
             @endforeach
         </div>
