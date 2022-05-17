@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('tweet/destroy/{id}',[TweetController::class,'destroy'])->name('tweet.destroy');
     Route::get('profile/index',[ProfileController::class,'index'])->name('profile.index');
     Route::post('profile/store',[ProfileController::class,'store'])->name('profile.store');
-    Route::get('profile/edit/{id}',[ProfileController::class,'edit'])->name('profile.edit');
+    Route::get('profile/edit',[ProfileController::class,'edit'])->name('profile.edit');
     Route::post('profile/update/{id}',[ProfileController::class,'update'])->name('profile.update');
     Route::post('profile/destroy',[ProfileController::class,'destroy'])->name('profile.destroy');
     Route::post('users/follow/{user}',[FollowerController::class,'follow'])->name('follow');
