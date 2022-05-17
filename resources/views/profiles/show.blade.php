@@ -48,7 +48,7 @@
                     <div class="flex justify-around space-x-4">
                         <a href="{{route('follow.show',['id' => $user->id])}}">フォロー数:{{$user->followCount($user->id)}}</a>
                         <a href="{{route('follower.show',['id' => $user->id])}}">フォロワー数:{{$user->followerCount($user->id)}}</a>
-                        <a href="{{route('favorite.tweets')}}">いいねしたツイート:{{$user->favoriteCount()}}</a>
+                        <a href="{{route('favorite.tweets',['id' => $user->id])}}">いいねしたツイート:{{$user->favoriteCount($user->id)}}</a>
                     </div>
                 </div>
             </div>

@@ -50,7 +50,7 @@
             <div class="flex justify-around">
                 <a href="{{route('follow.show',['id' => $user->id])}}" class="hover:text-blue-700">フォロー数:{{$user->followCount($user->id)}}</a>
                 <a href="{{route('follower.show',['id' => $user->id])}}" class="hover:text-blue-700">フォロワー数:{{$user->followerCount($user->id)}}</a>
-                <a href="{{route('favorite.tweets')}}" class="hover:text-blue-700">いいねしたツイート:{{$user->favoriteCount()}}</a>
+                <a href="{{route('favorite.tweets',['id' => $user->id])}}" class="hover:text-blue-700">いいねしたツイート:{{$user->favoriteCount($user->id)}}</a>
             </div>
         </div>
         <div class="max-w-screen-md m-auto my-5 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">

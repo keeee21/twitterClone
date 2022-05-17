@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -25,15 +26,22 @@ class FavoriteController extends Controller
         return response()->json(['status' => 200]);
     }
 
-    public function favoriteTweets()
+    public function favoriteTweets($userId)
     {
-        $favoriteTweets = Auth::user()->favorites;
+        if(is_null($userId)){
+            abort(404);
+        }
+
+        $favoriteTweets = User::find($userId)->favorites;
         return view('favorites.favoriteTweets',compact('favoriteTweets'));
     }
 
-    public function favoriteUsers($id)
+    public function favoriteUsers($tweetId)
     {
-        $tweetId = $id;
+        if(is_null($tweetId)){
+            abort(404);
+        }
+
         $favoriteUsers = Favorite::where('tweet_id',$tweetId)->get();
         return view('favorites.favoriteUsers',compact('favoriteUsers'));
     }

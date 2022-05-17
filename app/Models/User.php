@@ -59,18 +59,15 @@ class User extends Authenticatable
     }
 
     //「ユーザーが押した」いいね数
-    public function favoriteCount()
+    public function favoriteCount($userId)
     {
-        $favoriteCount = count(Favorite::where('user_id',Auth::id())->get());
+        $favoriteCount = count(Favorite::where('user_id',$userId)->get());
         return $favoriteCount;
     }
 
     public function checkAuthUserId($user_id)
     {
-        if ($this->id == $user_id){
-            return true;
-        }
-        return false;
+        return $this->id == $user_id;
     }
 
     public function tweets()

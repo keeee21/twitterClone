@@ -47,7 +47,7 @@ Route::get('/dashboard',[TweetController::class,'getDashboard'])->name('dashboar
 Route::get('user/index',[UserController::class,'index'])->name('user.index');
 Route::get('follow/{id}',[FollowerController::class,'showFollowingUser'])->name('follow.show');
 Route::get('follower/{id}',[FollowerController::class,'showFollowerUser'])->name('follower.show');
-Route::get('favorite.tweets',[FavoriteController::class,'favoriteTweets'])->name('favorite.tweets');
+Route::get('favorite/tweets/{id}',[FavoriteController::class,'favoriteTweets'])->name('favorite.tweets');
 Route::get('favorite/users/{id}',[FavoriteController::class,'favoriteUsers'])->name('favorite.users');
 Route::get('profile/show/{id}',[ProfileController::class,'show'])->name('profile.show');
 Route::get('tweet/{id}',[TweetController::class,'show'])->name('tweet.show');
