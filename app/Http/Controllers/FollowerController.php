@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Follower;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -27,15 +28,23 @@ class FollowerController extends Controller
         return response()->json(['status' => 200]);
     }
 
-    public function showFollowingUser()
+    public function showFollowingUser($id)
     {
-        $follows = Auth::user()->followings;
+        $user = User::find($id);
+        if(is_null($user)){
+            abort(404);
+        }
+        $follows = $user->followings;
         return view('follow.follow',compact('follows'));
     }
 
-    public function showFollowerUser()
+    public function showFollowerUser($id)
     {
-        $followers = Auth::user()->followers;
+        $user = User::find($id);
+        if(is_null($user)){
+            abort(404);
+        }
+        $followers = $user->followers;
         return view('follow.follower',compact('followers'));
     }
 }

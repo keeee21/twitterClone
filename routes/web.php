@@ -45,8 +45,8 @@ Route::group(['middleware' => 'auth'], function(){
 //ログインしなくても使えるものを外に出す
 Route::get('/dashboard',[TweetController::class,'getDashboard'])->name('dashboard');
 Route::get('user/index',[UserController::class,'index'])->name('user.index');
-Route::get('follow',[FollowerController::class,'showFollowingUser'])->name('follow.show');
-Route::get('follower',[FollowerController::class,'showFollowerUser'])->name('follower.show');
+Route::get('follow/{id}',[FollowerController::class,'showFollowingUser'])->name('follow.show');
+Route::get('follower/{id}',[FollowerController::class,'showFollowerUser'])->name('follower.show');
 Route::get('favorite.tweets',[FavoriteController::class,'favoriteTweets'])->name('favorite.tweets');
 Route::get('favorite/users/{id}',[FavoriteController::class,'favoriteUsers'])->name('favorite.users');
 Route::get('profile/show/{id}',[ProfileController::class,'show'])->name('profile.show');

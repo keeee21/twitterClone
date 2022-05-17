@@ -39,16 +39,16 @@ class User extends Authenticatable
         return Follower::where('following_id',Auth::id())->where('follower_id',$userId)->first();
     }
     //フォローしている数=フォロー数
-    public function followCount()
+    public function followCount($userId)
     {
-        $followCount = count(Follower::where('following_id',Auth::id())->get());
+        $followCount = count(Follower::where('following_id',$userId)->get());
         return $followCount;
     }
 
     //フォローされている数＝フォロワー数
-    public function followerCount()
+    public function followerCount($userId)
     {
-        $followerCount = count(Follower::where('follower_id',Auth::id())->get());
+        $followerCount = count(Follower::where('follower_id',$userId)->get());
         return $followerCount;
     }
 
