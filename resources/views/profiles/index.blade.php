@@ -12,7 +12,7 @@
         <x-session-message />
 
         <div class="my-5 p-5 border bg-white">
-            <div class="flex justify-end py-1">
+            <div class="flex justify-around py-1">
                 <a href="{{route('password.confirm')}}" class="inline-flex items-center px-4 py-2 mx-5 bg-white-800 border border-blue-700 border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:text-white hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150" >個人情報を編集する</a>
                 <a href="{{route('profile.edit')}}" class="inline-flex items-center px-4 py-2 bg-white-800 border border-blue-700 border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:text-white hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150" >プロフィールを編集する</a>
             </div>
