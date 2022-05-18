@@ -13,48 +13,48 @@
     <div class="w-11/12 max-w-screen-md m-auto my-5">
         <div class="max-w-screen-md m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
             <div class="flex justify-end mt-3 mb-0 p-0">
-                @if (Auth::id() === $tweet->user->id)
-                    <form method="post" action="{{route('tweet.destroy',$tweet->id)}}" class="mx-5">
+                @if (Auth::id() === $clickedTweet->user->id)
+                    <form method="post" action="{{route('tweet.destroy',$clickedTweet->id)}}" class="mx-5">
                     @csrf
-                        <a href="{{route('tweet.edit',$tweet->id)}}" class="mx-10 font-semibold hover:text-green-700">編集する</a>
-                        <button value="削除" data-id="{{$tweet->id}}" onclick="deletePost();" class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150" type="submit" >削除する</button>
+                        <a href="{{route('tweet.edit',$clickedTweet->id)}}" class="mx-10 font-semibold hover:text-green-700">編集する</a>
+                        <button value="削除" data-id="{{$clickedTweet->id}}" onclick="deletePost();" class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150" type="submit" >削除する</button>
                     </form>
                 @endif
             </div>
             <div class="py-5">
                 <div class="flex focus:outline-none">
                     <div class="m-5">
-                        @if(is_null($tweet->user->userProfile->icon_image))
+                        @if(is_null($clickedTweet->user->userProfile->icon_image))
                             <img class="w-20 h-20 rounded-full border" src="{{asset('images/no_image.png')}}">
                         @else
-                            <img class="w-20 h-20 rounded-full border" src="{{asset($tweet->user->userProfile->icon_image)}}">
+                            <img class="w-20 h-20 rounded-full border" src="{{asset($clickedTweet->user->userProfile->icon_image)}}">
                         @endif
                     </div>
-                    <div class="my-5 font-semibold">{{ $tweet->user->userProfile->screen_name }}</div>
+                    <div class="my-5 font-semibold">{{ $clickedTweet->user->userProfile->screen_name }}</div>
                 </div>
-                <div class="my-5 ml-5">{{ $tweet->content }}</div>
+                <div class="my-5 ml-5">{{ $clickedTweet->content }}</div>
                 <div class="flex justify-around">
-                        @if(!is_null($tweet->image))
-                            <img class="w-20 h-20 rounded" src="{{asset($tweet->image)}}">
+                        @if(!is_null($clickedTweet->image))
+                            <img class="w-20 h-20 rounded" src="{{asset($clickedTweet->image)}}">
                         @endif
                 </div>
                 <div>
-                    @if(!$tweet->user->canFavorite($tweet->id))
-                        <button data-tweet-id="{{$tweet->id}}" id="{{$tweet->id}}" class="favorite btn">いいね</button>
+                    @if(!$clickedTweet->user->canFavorite($clickedTweet->id))
+                        <button data-tweet-id="{{$clickedTweet->id}}" id="{{$clickedTweet->id}}" class="favorite btn">いいね</button>
                     @else
-                        <button data-tweet-id="{{$tweet->id}}" id="{{$tweet->id}}" class="favorite pushedFavorite">いいね</button>
+                        <button data-tweet-id="{{$clickedTweet->id}}" id="{{$clickedTweet->id}}" class="favorite pushedFavorite">いいね</button>
                     @endif
                 </div>
-                <div class="mt-5 mx-5 text-s flex justify-end">{{ $tweet->updated_at }}</div>
+                <div class="mt-5 mx-5 text-s flex justify-end">{{ $clickedTweet->updated_at }}</div>
             </div>
         </div>
             <div>
-                <a href="{{route('favorite.users',['id'=>$tweet->id])}}" class="hover:text-blue-700">{{$numOfPushedFavoriteBtn}}件のいいね</a>
+                <a href="{{route('favorite.users',['id'=>$clickedTweet->id])}}" class="hover:text-blue-700">{{$numOfPushedFavoriteBtn}}件のいいね</a>
             </div>
 
         {{-- リプのフォーム表示 --}}
         <div class="my-5">
-            <form method="POST" action="{{route('reply',$tweet)}}" enctype="multipart/form-data">
+            <form method="POST" action="{{route('reply',$clickedTweet)}}" enctype="multipart/form-data">
                 @csrf
                 <div class="flex justify-end">
                     <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150" type="submit" value="ツイートする">リプを送る</button>

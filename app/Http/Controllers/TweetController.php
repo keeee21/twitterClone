@@ -27,9 +27,8 @@ class TweetController extends Controller
     {
         $request->validate(self::RULES);
 
-        $userId = Auth::id();
         $tweet = new Tweet;
-        $tweet->user_id = $userId;
+        $tweet->user_id = Auth::id();
         $tweet->content = $request->content;
         $tweet->image = $this->saveImage($request->tweetImage);
         $tweet->save();
@@ -37,40 +36,40 @@ class TweetController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function show($id)
+    public function show($clickedTweetId)
     {   
-        $tweet = Tweet::find($id);
-        if(is_null($tweet)){
+        $clickedTweet = Tweet::find($clickedTweetId);
+        if(is_null($clickedTweet)){
             abort(404);
         }
 
-        $comments = Comment::where('tweet_id',$id)->get();
+        $comments = Comment::where('tweet_id',$clickedTweetId)->get();
 
-        $numOfPushedFavoriteBtn = $tweet->pushedFavoriteBtnCount($id);
-        return view('tweets.show',compact('tweet','numOfPushedFavoriteBtn','comments'));
+        $numOfPushedFavoriteBtn = $clickedTweet->pushedFavoriteBtnCount($clickedTweetId);
+        return view('tweets.show',compact('clickedTweet','numOfPushedFavoriteBtn','comments'));
     }
 
-    public function edit($id)
+    public function edit($editingTweetId)
     {
-        $tweet = Tweet::find($id);
-        $user = User::find(Auth::id());
+        $editingTweet = Tweet::find($editingTweetId);
+        $authUser = User::find(Auth::id());
 
         //$tweetは存在するか
-        if(is_null($tweet)){
+        if(is_null($editingTweet)){
             abort(404);
         }
         //ツイートがログインユーザーによって作成されたか
-        if(!$tweet->isCreatedByUser(Auth::id())){
+        if(!$editingTweet->isCreatedByUser(Auth::id())){
             abort(404);
         }
-        return view('tweets.edit',compact('user','tweet'));
+        return view('tweets.edit',compact('authUser','$editingTweet'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $updateTweetId)
     {
         $request->validate(self::RULES);
 
-        $updateTweet = Tweet::find($id);
+        $updateTweet = Tweet::find($updateTweetId);
         $updateTweet->content = $request->content;
         $updateTweet->image = $this->saveImage($request->tweetImage);
 
@@ -81,12 +80,12 @@ class TweetController extends Controller
         return redirect()->route('dashboard')->with('error','許可されていない操作です');
     }
 
-    public function destroy($id)
+    public function destroy($destroyingTweetId)
     {
-        $user = Auth::user();
-        $tweet = Tweet::find($id);
-        if($user->checkAuthUserId($tweet->user_id)){
-            $tweet->delete();
+        $destroyingTweet = Tweet::find($destroyingTweetId);
+
+        if(Auth::user()->checkAuthUserId($destroyingTweet->user_id)){
+            $destroyingTweet->delete();
             return redirect()->route('dashboard')->with('success','完全に削除しました');
         }
         return redirect()->route('dashboard')->with('error','許可されていない操作です');

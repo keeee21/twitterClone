@@ -625,12 +625,6 @@ select {
 .m-5 {
   margin: 1.25rem;
 }
-.m-3 {
-  margin: 0.75rem;
-}
-.m-2 {
-  margin: 0.5rem;
-}
 .mx-5 {
   margin-left: 1.25rem;
   margin-right: 1.25rem;
@@ -638,6 +632,10 @@ select {
 .my-5 {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
+}
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 .mx-2 {
   margin-left: 0.5rem;
@@ -650,10 +648,6 @@ select {
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
-}
-.my-3 {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
 }
 .ml-3 {
   margin-left: 0.75rem;
@@ -673,6 +667,24 @@ select {
 .mt-5 {
   margin-top: 1.25rem;
 }
+.mr-3 {
+  margin-right: 0.75rem;
+}
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+.mt-10 {
+  margin-top: 2.5rem;
+}
+.mt-20 {
+  margin-top: 5rem;
+}
+.ml-1 {
+  margin-left: 0.25rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
 .mt-3 {
   margin-top: 0.75rem;
 }
@@ -685,12 +697,6 @@ select {
 .mt-4 {
   margin-top: 1rem;
 }
-.mr-3 {
-  margin-right: 0.75rem;
-}
-.mt-2 {
-  margin-top: 0.5rem;
-}
 .mr-2 {
   margin-right: 0.5rem;
 }
@@ -699,12 +705,6 @@ select {
 }
 .mb-0 {
   margin-bottom: 0px;
-}
-.mb-5 {
-  margin-bottom: 1.25rem;
-}
-.ml-1 {
-  margin-left: 0.25rem;
 }
 .-mr-2 {
   margin-right: -0.5rem;
@@ -723,12 +723,6 @@ select {
 }
 .-mt-px {
   margin-top: -1px;
-}
-.mt-20 {
-  margin-top: 5rem;
-}
-.mt-10 {
-  margin-top: 2.5rem;
 }
 .block {
   display: block;
@@ -967,6 +961,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(30 64 175 / var(--tw-bg-opacity));
 }
+.bg-gray-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}
 .bg-blue-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(147 197 253 / var(--tw-bg-opacity));
@@ -978,14 +976,6 @@ select {
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-}
-.bg-pink-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 168 212 / var(--tw-bg-opacity));
-}
-.bg-gray-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
 .fill-current {
   fill: currentColor;
@@ -1386,13 +1376,13 @@ select {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
 }
-.hover\:text-gray-900:hover {
-  --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity));
-}
 .hover\:text-blue-700:hover {
   --tw-text-opacity: 1;
   color: rgb(29 78 216 / var(--tw-text-opacity));
+}
+.hover\:text-gray-900:hover {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
