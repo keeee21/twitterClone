@@ -12,7 +12,5 @@ class ImageService
         } else {
             $iconImage = null;
         }
-
     }
-
 }

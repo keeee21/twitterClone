@@ -11,9 +11,8 @@ class FollowerController extends Controller
 {
     public function follow(Request $request)
     {
-        $userId = Auth::id();
         $followUserId = $request->user_id;
-        $isAlreadyFollow = Follower::where('following_id',$userId)->where('follower_id',$followUserId)->first();
+        $isAlreadyFollow = Follower::where('following_id',Auth::id())->where('follower_id',$followUserId)->first();
 
         if(!$isAlreadyFollow){ //フォローをしていない場合
             $follow = new Follower();

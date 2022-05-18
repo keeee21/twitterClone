@@ -23,15 +23,14 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $userId = Auth::id();
-        $user = User::find($userId);
+        $user = User::find(Auth::id());
 
         return view('profiles.index',compact('user'));
     }
 
-    public function show($id)
+    public function show($userId)
     {
-        $user = User::find($id);
+        $user = User::find($userId);
         if(is_null($user)){
             abort(404);
         }
@@ -49,11 +48,11 @@ class ProfileController extends Controller
         return view('profiles.edit',compact('user'));
     }
 
-    public function update(Request $request, UserProfile $savedUserProfile, $id)
+    public function update(Request $request, UserProfile $savedUserProfile, $userId)
     {
         $request->validate(self::RULES);
 
-        $savedUserProfile = UserProfile::find($id);
+        $savedUserProfile = UserProfile::find($userId);
 
         $userProfile = Auth::user()->UserProfile::where('user_id',Auth::id())->first();
         $userProfile->user_id = Auth::id();
