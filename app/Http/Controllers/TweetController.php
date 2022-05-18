@@ -62,7 +62,7 @@ class TweetController extends Controller
         if(!$editingTweet->isCreatedByUser(Auth::id())){
             abort(404);
         }
-        return view('tweets.edit',compact('authUser','$editingTweet'));
+        return view('tweets.edit',compact('authUser','editingTweet'));
     }
 
     public function update(Request $request, $updateTweetId)
