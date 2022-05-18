@@ -53,8 +53,9 @@
                 <a href="{{route('favorite.tweets',['id' => $user->id])}}" class="hover:text-blue-700">いいねしたツイート:{{$user->favoriteCount($user->id)}}</a>
             </div>
         </div>
+
         <div class="max-w-screen-md m-auto my-5 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-            @foreach($user->tweets as $tweet)
+            @foreach($tweets as $tweet)
                 <div class="border py-5">
                     <a href="{{route('tweet.show',['id' => $tweet->id])}}">
                         <div class="flex focus:outline-none">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Traits\SaveImage;
+use App\Models\Tweet;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Support\Facades\Auth;
@@ -24,8 +25,9 @@ class ProfileController extends Controller
     public function index()
     {
         $user = User::find(Auth::id());
+        $tweets = Tweet::where('user_id',Auth::id())->orderBy('created_at','desc')->get();
 
-        return view('profiles.index',compact('user'));
+        return view('profiles.index',compact('user','tweets'));
     }
 
     public function show($userId)

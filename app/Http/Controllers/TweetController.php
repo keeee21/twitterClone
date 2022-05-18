@@ -43,7 +43,7 @@ class TweetController extends Controller
             abort(404);
         }
 
-        $comments = Comment::where('tweet_id',$clickedTweetId)->get();
+        $comments = Comment::where('tweet_id',$clickedTweetId)->orderBy('created_at','desc')->get();
 
         $numOfPushedFavoriteBtn = $clickedTweet->pushedFavoriteBtnCount($clickedTweetId);
         return view('tweets.show',compact('clickedTweet','numOfPushedFavoriteBtn','comments'));
