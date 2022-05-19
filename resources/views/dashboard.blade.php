@@ -1,83 +1,72 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">タイムライン</h2>
+        <div class="flex justify-around">
+            <a href="{{route('dashboard')}}"><h2 class="mx-5 font-semibold text-xl text-gray-800 leading-tight hover:text-blue-700">タイムライン</h2></a>
+            <a href="{{route('tweet.create')}}"><h2 class="mx-5 text-xl text-gray-400 leading-tight hover:text-blue-700">ツイートする</h2></a>
+            <a href="{{route('user.index')}}"><h2 class="mx-5  text-xl text-gray-400 leading-tight hover:text-blue-700">ユーザー一覧</h2></a>
+            <a href="{{route('profile.index')}}"><h2 class="mx-5 text-xl text-gray-400 leading-tight hover:text-blue-700">マイページ</h2></a>
+        </div>    
     </x-slot>
-    
-    <div flex justify-around items-center>
-        <div class="w-11/12 max-w-screen-md m-auto">
 
-            {{-- タイトル --}}
-                <h1 class="text-xl font-bold mt-5">ツイート作成</h1>
-
-            <!-- {{-- 入力フォーム --}}
-            <div class="bg-white rounded-md mt-5 p-3">
-                <form action="{{route('dashboard')}}" method="POST">
-                    @csrf
-                    <div class="flex flex-col mt-2">
-                            <p class="font-bold">本文</p>
-                            <textarea class="border rounded px-2" name="content"></textarea>
-                    </div>
-                    <div class="flex justify-end mt-2">
-                            <input class="my-2 px-2 py-1 rounded bg-blue-300 text-blue-900 font-bold link-hover cursor-pointer" type="submit" value="ツイート">
-                    </div>
-                </form>
-            </div> -->
-            
-
-            <!-- タイムライン生成 
-            {{-- @foreach ($tweets as $tweet) --}}
-                <div class="bg-white rounded-md mt-1 mb-5 p-3">
-            {{-- 投稿/ツイート --}}
-                <div>
-                    {{-- <p class="mb-2 text-xs">{{$tweet->created_at}}</p> --}}
-                    {{-- <p class="mb-2 text-l">{{$tweet->name}}</p> --}}
-                    {{-- <p class="mb-2">{{$tweet->content}}</p> --}}
+    {{-- フォーム作成 --}}
+    <div class="max-w-screen-md m-auto rounded-lg">
+        <form method="GET" action="{{route('search.show')}}">
+            <div class="flex justify-end mt-4">
+                <select name="category" class="mb-2 mx-2">
+                    <option value="all">全て</option>
+                    <option value="tweet">ツイート</option>
+                    <option value="account">アカウント</option>
+                </select>
+                <div class="flex justify-end">
+                    <button type="submit" class="inline-flex items-center mb-2 px-4 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150" type="submit" value="色々と検索する">キーワード検索</button>
                 </div>
-            {{-- 詳細ボタン --}}
-                <form class="flex justify-end mt-5" action="/" method="POST">
-                    @csrf
-                    <input class="border rounded px-2 flex-auto" type="text" name="reply_message">
-                    <input class="px-2 py-1 ml-2 rounded bg-green-600 text-white font-bold link-hover cursor-pointer" type="submit" value="詳細を見る">
-                </form>
-
-                {{-- 返信 --}}
-                <hr class="mt-2 m-auto">
-                    <div class="flex justify-end">
-                        <div class="w-11/12">
-                            <div>
-                                {{-- <p> class="mt-2 text-xs">{{$tweet->created_at}}</p> --}}
-                            </div>
-                        </div>
-                    </div>
-            {{-- @endforeach --}} -->
-
-
-            {{-- ここからアレンジ　--}}
-            <div class="bg-pink-500">
-                <div class="flex">
-                    <form action="{{route('tweet.create')}}" method="GET">
-                        <button type="submit " class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150'">ツイートする</button>
-                    </form>
-
-                    <form action="" method="">
-                        <button type="submit " class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150'">プロフィール更新</button>
-                    </form>
-
-                </div>
-
             </div>
+            <div>
+                <input type="text" name="keyword" required class="block p-2.5 w-full text-sm text-gray-900 bg-white-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="キーワードを入力してください">
+            </div>
+        </form>
+    </div>
 
+    <x-session-message />
 
-
-
-
-
-
-
-
-        
-
-
-        </div>
+    <div class="max-w-screen-md m-auto mt-5 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+        @foreach($tweets as $tweet)
+            @if($user->canFollow($tweet->user_id) || $tweet->user_id == Auth::id())
+            <div class="border py-5">
+                <a href="{{route('tweet.show',['id' => $tweet->id])}}">
+                    <div class="flex focus:outline-none">
+                        <div class="m-5">
+                            @if(is_null($tweet->User->UserProfile->icon_image))
+                                <img class="w-20 h-20 rounded-full border" src="{{asset('images/no_image.png')}}" >
+                            @else
+                                <img class="w-20 h-20 rounded-full border" src="{{asset($tweet->User->UserProfile->icon_image)}}">
+                            @endif
+                        </div>
+                        <div class="my-5 font-semibold">{{ $tweet->User->UserProfile->screen_name }}</div>
+                    </div>
+                    <div class="my-5 ml-5">{{ $tweet->content }}</div>
+                    <div class="flex justify-around">
+                            @if(!is_null($tweet->image))
+                                <img class="w-20 h-20 rounded" src="{{asset($tweet->image)}}">
+                            @endif
+                    </div>
+                </a>
+                <div class="flex justify-content">
+                    <div>
+                        @if(!$user->canFavorite($tweet->id))
+                            <button data-tweet-id="{{$tweet->id}}" id="{{$tweet->id}}" class="favorite btn">いいね</button>
+                        @else
+                            <button data-tweet-id="{{$tweet->id}}" id="{{$tweet->id}}" class="favorite pushedFavorite">いいね</button>
+                        @endif
+                    </div>
+                    <div class="mt-2">
+                        <a href="{{route('tweet.show',['id' => $tweet->id])}}" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900">リプする</a>
+                    </div>
+                </div>
+                <div class="mt-2 mx-5 text-s flex justify-end">{{ $tweet->updated_at }}</div>
+            </div>
+            @endif
+        @endforeach
     </div>
 </x-app-layout>
+

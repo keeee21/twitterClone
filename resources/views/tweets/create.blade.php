@@ -1,27 +1,34 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">今なにしてる？</h2>
+        <div class="flex justify-around">
+            <a href="{{route('dashboard')}}"><h2 class="mx-5 text-xl text-gray-400 leading-tight hover:text-blue-700">タイムライン</h2></a>
+            <a href="{{route('tweet.create')}}"><h2 class="mx-5 font-semibold text-xl text-gray-800 leading-tight hover:text-blue-700">ツイートする</h2></a>
+            <a href="{{route('user.index')}}"><h2 class="mx-5  text-xl text-gray-400 leading-tight hover:text-blue-700">ユーザー一覧</h2></a>
+            <a href="{{route('profile.index')}}"><h2 class="mx-5  text-xl text-gray-400 leading-tight hover:text-blue-700">マイページ</h2></a>
+        </div> 
     </x-slot>
     
-    <div flex justify-around items-center>
-        <div class="w-11/12 max-w-screen-md m-auto">
+    <div class="w-11/12 max-w-screen-md m-auto">
+        <x-session-message />
 
-            {{-- フォーム作成 --}}
-                <h1 class="text-xl font-bold mt-5">ツイート作成</h1>
-
-                <div>
-                    <form method="POST" action="{{route('tweet.store')}}">
-                        @csrf
-                        <div>
-                            <textarea name="content" id="" cols="20" rows="10"></textarea>
-                        </div>
-                        <input class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150" type="submit" value="登録する">
-
-                    </form>
+        {{-- ツイートフォーム --}}
+        <div class="mt-5">
+            <form method="POST" action="{{route('tweet.store')}}" enctype="multipart/form-data">
+                @csrf
+                <div class="flex justify-end">
+                    <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150" type="submit" value="ツイートする">ツイートする</button>
                 </div>
-            
-
-
+                <div>
+                    <div>
+                        <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"></label>
+                        <textarea id="content" name="content" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="今なにしてる？"></textarea>
+                    </div>
+                    <div class="mb-8">
+                        <label for="tweetImage" class="text-sm block">画像を添付</label>
+                        <input name="tweetImage" type="file" id="tweetImage" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100" placeholder="アイコン画像">
+                    </div> 
+                </div>
+            </form>
         </div>
     </div>
 </x-app-layout>
