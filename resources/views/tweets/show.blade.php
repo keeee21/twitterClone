@@ -22,22 +22,24 @@
                 @endif
             </div>
             <div class="py-5">
-                <div class="flex focus:outline-none">
-                    <div class="m-5">
-                        @if(is_null($clickedTweet->user->userProfile->icon_image))
-                            <img class="w-20 h-20 rounded-full border" src="{{asset('images/no_image.png')}}">
-                        @else
-                            <img class="w-20 h-20 rounded-full border" src="{{asset($clickedTweet->user->userProfile->icon_image)}}">
-                        @endif
+                <a href="{{route('profile.show',['id' =>$clickedTweet->user_id])}}">
+                    <div class="flex focus:outline-none">
+                        <div class="m-5">
+                            @if(is_null($clickedTweet->user->userProfile->icon_image))
+                                <img class="w-20 h-20 rounded-full border" src="{{asset('images/no_image.png')}}">
+                            @else
+                                <img class="w-20 h-20 rounded-full border" src="{{asset($clickedTweet->user->userProfile->icon_image)}}">
+                            @endif
+                        </div>
+                        <div class="my-5 font-semibold">{{ $clickedTweet->user->userProfile->screen_name }}</div>
                     </div>
-                    <div class="my-5 font-semibold">{{ $clickedTweet->user->userProfile->screen_name }}</div>
-                </div>
+                </a>    
                 <div class="my-5 ml-5">{{ $clickedTweet->content }}</div>
                 <div class="flex justify-around">
                         @if(!is_null($clickedTweet->image))
                             <img class="w-20 h-20 rounded" src="{{asset($clickedTweet->image)}}">
                         @endif
-                </div>
+                    </div>
                 <div>
                     @if(!$clickedTweet->user->canFavorite($clickedTweet->id))
                         <button data-tweet-id="{{$clickedTweet->id}}" id="{{$clickedTweet->id}}" class="favorite btn">いいね</button>
