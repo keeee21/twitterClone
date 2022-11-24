@@ -9,12 +9,19 @@ class Favorite extends Model
 {
     use HasFactory;
 
-    public function User()
+    protected $table = 'favorites';
+
+    protected $fillable = [
+        'user_id',
+        'tweet_id',
+    ];
+
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function Tweet()
+    public function tweet()
     {
-        return $this->belongsTo(Tweet::class);
+        return $this->belongsTo(Tweet::class, 'tweet_id');
     }
 }

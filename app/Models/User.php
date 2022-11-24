@@ -2,22 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Tweet;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Follower;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    protected $table = 'users';
+
     protected $fillable = [
         'name',
         'email',
@@ -26,42 +24,76 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    public function tweet()
+    //フォローできる対象かどうかをチェック
+    public function canFollow($userId)
     {
-        return $this->hasOne(Tweet::class);
+        return Follower::where('following_id',Auth::id())->where('follower_id',$userId)->first();
+    }
+    //フォローしている数=フォロー数
+    public function followCount($userId)
+    {
+        $followCount = count(Follower::where('following_id',$userId)->get());
+        return $followCount;
     }
 
-    public function user_profile()
+    //フォローされている数＝フォロワー数
+    public function followerCount($userId)
     {
-            return $this->hasOne(UserProfile::class);
+        $followerCount = count(Follower::where('follower_id',$userId)->get());
+        return $followerCount;
     }
 
-    public function reaction()
+    //いいねを押して良いかどうか
+    public function canFavorite($tweet)
     {
-        return $this->hasMany(Reaction::class);
+        return Favorite::where('user_id',Auth::id())->where('tweet_id',$tweet)->first();
     }
 
-    public function favorite()
+    //「ユーザーが押した」いいね数
+    public function favoriteCount($userId)
+    {
+        $favoriteCount = count(Favorite::where('user_id',$userId)->get());
+        return $favoriteCount;
+    }
+
+    public function checkAuthUserId($user_id)
+    {
+        return $this->id == $user_id;
+    }
+
+    public function tweets()
+    {
+        return $this->hasMany(Tweet::class);
+    }
+
+    public function userProfile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
+
+    //いいね
+    public function favorites()
     {
         return $this->hasMany(Favorite::class);
+    }
+
+    // フォロー
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'followers','following_id','follower_id');
+    }
+    //フォロワー
+    public function followers()
+    {
+        return $this->belongsToMany(User::class,'followers','follower_id','following_id');
     }
 }
