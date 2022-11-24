@@ -7,7 +7,7 @@
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
-            {{ __('ログイン時に使用したパスワードを入力してください。') }}
+            {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
         </div>
 
         <!-- Validation Errors -->
@@ -18,7 +18,7 @@
 
             <!-- Password -->
             <div>
-                <x-label for="password" :value="__('パスワード')" />
+                <x-label for="password" :value="__('Password')" />
 
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
@@ -27,9 +27,9 @@
             </div>
 
             <div class="flex justify-end mt-4">
-                <button class="py-2 px-3 mr-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-blue-600 hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                    編集画面へ
-                </button>            
+                <x-button>
+                    {{ __('Confirm') }}
+                </x-button>
             </div>
         </form>
     </x-auth-card>

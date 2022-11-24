@@ -31,7 +31,7 @@ return [
         'array'   => ':attributeは、:min個から:max個の間で指定してください。',
     ],
     'boolean'              => ':attributeは、trueかfalseを指定してください。',
-    'confirmed'            => ':attributeと、確認用:attributeとが、一致していません。',
+    'confirmed'            => ':attributeと、確認フィールドとが、一致していません。',
     'current_password'     => 'パスワードが正しくありません。',
     'date'                 => ':attributeには有効な日付を指定してください。',
     'date_equals'          => ':attributeには、:dateと同じ日付けを指定してください。',
@@ -153,19 +153,6 @@ return [
     |
     */
 
-    'attributes' => [
-        'screen_name' => 'アカウント名',
-        'content' => 'ツイート本文',
-        'name' => '氏名',
-        'email' => 'メールアドレス',
-        'password' => 'パスワード',
-        'icon_image' => 'アイコン',
-        'header_image' => 'ヘッダー',
-        'keyword' => '検索するキーワード',
-        'reply' => 'リプ',
-        'tweetImage' => '選択するファイル',
-        'description' => '自己紹介',
-        'location' => '場所',
-    ],
+    'attributes' => [],
 
 ];

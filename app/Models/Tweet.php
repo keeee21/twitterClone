@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,24 +19,18 @@ class Tweet extends Model
         'image',
     ];
 
-    public function user()
+    public function User()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class);
     }
 
-    public function favorites()
+    public function reaction()
+    {
+        return $this->hasMany(Reaction::class);
+    }
+
+    public function favorite()
     {
         return $this->hasMany(Favorite::class);
-    }
-
-    //「ツイートが」押されたいいね数
-    public function pushedFavoriteBtnCount($tweetId)
-    {
-        $numOfPushedFavoriteBtn = count(Favorite::where('tweet_id',$tweetId)->get());
-        return $numOfPushedFavoriteBtn;
-    }
-
-    public function isCreatedByUser($userId){
-        return $this->user_id === $userId;
     }
 }
