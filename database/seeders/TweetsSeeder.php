@@ -24,12 +24,6 @@ class TweetsSeeder extends Seeder
             'content' => 'abcdefg',
             'image' => '',
             'created_at'=> '2022/08/10 12:12:12'
-        ],
-        [
-            'user_id' => '2',
-            'content' => 'おおおお',
-            'image' => '',
-            'created_at' => '2022/09/22 08:09:10'
         ]);
     }
 }
